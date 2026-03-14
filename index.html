@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizzeria Il Semaforo | Campi Bisenzio</title>
+  <meta name="description" content="Pizzeria tradizionale a Campi Bisenzio. Giro pizza, musica dal vivo e atmosfera familiare.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="images/logo1.jpg">
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#" id="home-link">
+      <img src="images/logo1.jpg" alt="Logo" class="navbar-logo">
+      <span>Il <span class="text-primary">Semaforo</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="#" data-page="home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-page="about">Chi Siamo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-page="menu">Menù</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-page="gallery">Galleria</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-page="reviews">Recensioni</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-page="contact">Contatti</a>
+        </li>
+      </ul>
+      <button class="btn btn-primary ms-lg-3" onclick="openBookingModal()">
+        <i class="fas fa-calendar-check me-2"></i>Prenota
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div id="main-content">
+  <!-- HERO SECTION -->
+  <section class="hero-section" id="home">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <div class="row min-vh-100 align-items-center">
+        <div class="col-lg-8 text-white">
+          <h1 class="hero-title">Pizzeria <span class="text-primary">Il Semaforo</span></h1>
+          <p class="hero-subtitle">Dal 2024, la passione per la vera pizza italiana a Campi Bisenzio</p>
+          <div class="hero-features">
+            <span><i class="fas fa-pizza-slice me-2"></i>Giro Pizza No Stop</span>
+            <span><i class="fas fa-music me-2"></i>Musica dal Vivo</span>
+            <span><i class="fas fa-euro-sign me-2"></i>Menù Fisso 20€</span>
+          </div>
+          <div class="hero-buttons mt-4">
+            <button class="btn btn-primary btn-lg" onclick="openBookingModal()">
+              <i class="fas fa-calendar-check me-2"></i>Prenota Ora
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-wave">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- SEZIONI HOME -->
+  <div id="home-sections">
+    <!-- MENU SECTION -->
+    <section class="menu-section" id="menu">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">Le Nostre Specialità</span>
+          <h2 class="section-title">Il Nostro Menù</h2>
+          <p class="section-description">Sapori autentici, ingredienti selezionati, ricette tradizionali</p>
+        </div>
+        
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="menu-category-card">
+              <h3><i class="fas fa-utensils me-2 text-primary"></i>Antipasti</h3>
+              <div class="menu-item">
+                <div class="menu-item-info">
+                  <h4>Antipasto della Casa</h4>
+                  <p>Selezione di salumi toscani, schiacciata calda, verdure sott'olio</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="menu-category-card">
+              <h3><i class="fas fa-pizza-slice me-2 text-primary"></i>Pizze</h3>
+              <div class="menu-item">
+                <div class="menu-item-info">
+                  <h4>Giro Pizza No Stop</h4>
+                  <p>Un viaggio attraverso i sapori della tradizione. Richiedi i gusti e crea la tua selezione</p>
+                </div>
+              </div>
+              <div class="menu-badge">
+                <span class="badge bg-primary">A volontà</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-6">
+            <div class="menu-category-card">
+              <h3><i class="fas fa-cake me-2 text-primary"></i>Dolci</h3>
+              <div class="menu-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4>Tiramisù Classico</h4>
+                  <span class="menu-price">€ 3,00</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4>Panna Cotta ai Frutti di Bosco</h4>
+                  <span class="menu-price">€ 3,00</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4>Torta della Nonna</h4>
+                  <span class="menu-price">€ 3,00</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4>Cheesecake ai Frutti di Bosco</h4>
+                  <span class="menu-price">€ 3,00</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4>Sorbetto al Limone</h4>
+                  <span class="menu-price">€ 3,00</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="menu-category-card">
+              <h3><i class="fas fa-wine-bottle me-2 text-primary"></i>Bevande</h3>
+              <div class="menu-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4>Bibite (33cl)</h4>
+                  <span class="menu-price">Incluse*</span>
+                </div>
+                <p class="text-muted small">Coca-Cola, Fanta, Sprite, Acqua</p>
+              </div>
+              <p class="menu-note mt-3">
+                <i class="fas fa-info-circle text-primary me-1"></i>
+                *Nel menù fisso è inclusa 1 bibita piccola a persona
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECENSIONI SECTION - MIGLIORATA -->
+    <section class="testimonials-section" id="reviews">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">Cosa Dicono di Noi</span>
+          <h2 class="section-title">Recensioni</h2>
+          <p class="section-description">Le opinioni dei nostri clienti</p>
+        </div>
+        
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="testimonial-card">
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">"Cibo e accoglienza meravigliosi..sembra di essere all'interno della loro famiglia quando sei lì.. Un ultimo dell'anno strepitoso!"</p>
+              <div class="testimonial-author">
+                <div class="author-avatar"><i class="fas fa-user"></i></div>
+                <div>
+                  <h5>Valentina</h5>
+                  <span>Cliente</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="testimonial-card">
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">"Pizzeria davvero interessante, soprattutto per il rapporto qualità-prezzo. Con 20€ menù completo con antipasto e pizza a volontà, ormai raro!"</p>
+              <div class="testimonial-author">
+                <div class="author-avatar"><i class="fas fa-user"></i></div>
+                <div>
+                  <h5>Yuran</h5>
+                  <span>Cliente</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="testimonial-card">
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">"Locale accogliente e personale gentilissimo. La pizza è davvero top e il rapporto qualità-prezzo è ottimo. Consigliatissimo!"</p>
+              <div class="testimonial-author">
+                <div class="author-avatar"><i class="fas fa-user"></i></div>
+                <div>
+                  <h5>Laura Verdi</h5>
+                  <span>Cliente</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATTI SECTION -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">Vieni a Trovarci</span>
+          <h2 class="section-title">Contatti e Mappa</h2>
+          <p class="section-description">Siamo a Campi Bisenzio, ti aspettiamo!</p>
+        </div>
+        
+        <div class="row">
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <div class="contact-info-card">
+              <h3>Informazioni</h3>
+              <ul class="contact-list">
+                <li>
+                  <i class="fas fa-map-marker-alt"></i>
+                  <div><strong>Indirizzo</strong><p>Via Palagetta, 50013 Campi Bisenzio (FI)</p></div>
+                </li>
+                <li>
+                  <i class="fas fa-phone"></i>
+                  <div><strong>Telefono / WhatsApp</strong><p>+39 340 304 6310</p></div>
+                </li>
+                <li>
+                  <i class="fas fa-envelope"></i>
+                  <div><strong>Email</strong><p>ilsemaforo.pizzeria@gmail.com</p></div>
+                </li>
+                <li>
+                  <i class="fas fa-clock"></i>
+                  <div><strong>Orari</strong><p>Giovedì - Domenica: 19:00 - 23:00</p></div>
+                </li>
+              </ul>
+              
+              <div class="social-links mt-4">
+                <a href="https://www.facebook.com/share/1C1YCfUDes/" target="_blank" class="social-link">
+                  <img src="images/facebook-logo.png" alt="Facebook">
+                </a>
+                <a href="https://www.instagram.com/pizzeriailsemaforo?igsh=YWFvbTQyb2NyZmo=" target="_blank" class="social-link">
+                  <img src="images/Instagram-logo.png" alt="Instagram">
+                </a>
+                <a href="https://www.tiktok.com/@ilsemaforopizzeria?_t=ZN-8yBpSv8H5JG&_r=1" target="_blank" class="social-link">
+                  <img src="images/tiktok-logo.png" alt="TikTok">
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-6">
+            <div class="map-container">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1462.4312215232844!2d11.1203234!3d43.8093687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a59b7d8859209%3A0x98788d2f085c6016!2sPizzeria%20Il%20Semaforo!5e0!3m2!1sit!2sit!4v1695151262428!5m2!1sit!2sit" 
+                allowfullscreen="" 
+                loading="lazy">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="footer-logo">
+          <img src="images/logo1.jpg" alt="Logo">
+          <span>Il Semaforo</span>
+        </div>
+        <p class="footer-text">Pizzeria familiare con passione per la tradizione italiana. Giro pizza, musica dal vivo e atmosfera accogliente.</p>
+        <div class="social-links mt-3">
+          <a href="https://www.facebook.com/share/1C1YCfUDes/" target="_blank" class="social-link">
+            <img src="images/facebook-logo.png" alt="Facebook">
+          </a>
+          <a href="https://www.instagram.com/pizzeriailsemaforo?igsh=YWFvbTQyb2NyZmo=" target="_blank" class="social-link">
+            <img src="images/Instagram-logo.png" alt="Instagram">
+          </a>
+          <a href="https://www.tiktok.com/@ilsemaforopizzeria?_t=ZN-8yBpSv8H5JG&_r=1" target="_blank" class="social-link">
+            <img src="images/tiktok-logo.png" alt="TikTok">
+          </a>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <h4 class="footer-title">Link Rapidi</h4>
+        <ul class="footer-links">
+          <li><a href="#" data-page="home">Home</a></li>
+          <li><a href="#" data-page="about">Chi Siamo</a></li>
+          <li><a href="#" data-page="menu">Menù</a></li>
+          <li><a href="#" data-page="gallery">Galleria</a></li>
+          <li><a href="#" data-page="reviews">Recensioni</a></li>
+          <li><a href="#" data-page="contact">Contatti</a></li>
+        </ul>
+      </div>
+      
+      <div class="col-lg-4">
+        <h4 class="footer-title">Contatti</h4>
+        <ul class="footer-contact">
+          <li><i class="fas fa-phone"></i> +39 340 304 6310</li>
+          <li><i class="fas fa-envelope"></i> ilsemaforo.pizzeria@gmail.com</li>
+          <li><i class="fas fa-map-marker-alt"></i> Via Palagetta, Campi Bisenzio</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 Pizzeria Il Semaforo - P.IVA: 07270540482</p>
+      <p>
+        <a href="#">Privacy Policy</a> | 
+        <a href="#">Cookie Policy</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Button -->
+<a href="https://wa.me/393403046310?text=Ciao!%20Vorrei%20prenotare%20un%20tavolo" 
+   class="whatsapp-float" 
+   target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Modale di Prenotazione -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3><i class="fas fa-calendar-check me-2"></i>Prenota il tuo Tavolo</h3>
+      <button class="close-btn" onclick="closeBookingModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfYLNlWhnFGSMxE7Sfzd-KNLvZm51Ro5aCQT3okDZD2yP6OHA/viewform?usp=dialog" 
+              class="google-form-frame"
+              frameborder="0"
+              title="Modulo di prenotazione">
+      </iframe>
+      <div class="form-badges">
+        <span class="badge"><i class="fas fa-clock me-1"></i>Aperti Gio-Dom 19:00-23:00</span>
+        <span class="badge"><i class="fas fa-shield-alt me-1"></i>Dati protetti</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
