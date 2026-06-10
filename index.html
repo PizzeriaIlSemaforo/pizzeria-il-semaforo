@@ -14,12 +14,13 @@
   
   <style>
     #fullCountdown {
-      background: rgba(0,0,0,0.85);
-      padding: 6px 15px;
+      background: rgba(0,0,0,0.8);
+      padding: 5px 12px;
       border-radius: 50px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-family: 'Courier New', monospace;
       font-weight: bold;
+      white-space: nowrap;
     }
     .badge-festa {
       background: linear-gradient(135deg, #cc0000, #009900);
@@ -56,6 +57,10 @@
         top: 0;
         right: 0;
       }
+      #fullCountdown {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+      }
     }
   </style>
 </head>
@@ -71,9 +76,7 @@
       </div>
       <div id="fullCountdown">
         <i class="fas fa-hourglass-half me-1"></i>
-        <span id="countdownDays">--</span>g 
-        <span id="countdownHours">--</span>h 
-        <span id="countdownMinutes">--</span>m
+        <span id="countdownDisplay">Caricamento...</span>
       </div>
     </div>
   </div>
@@ -139,9 +142,8 @@
     </div>
   </section>
 
-  <!-- HOME SECTIONS (senza menù) -->
+  <!-- HOME SECTIONS -->
   <div id="home-sections">
-    <!-- BANNER FESTA -->
     <div class="container mt-4">
       <div class="row">
         <div class="col-12">
@@ -156,7 +158,6 @@
       </div>
     </div>
 
-    <!-- INFO CARDS -->
     <section class="info-section">
       <div class="container">
         <div class="row">
@@ -168,7 +169,6 @@
       </div>
     </section>
 
-    <!-- RECENSIONI -->
     <section class="testimonials-section" id="reviews">
       <div class="container">
         <div class="text-center"><span class="section-subtitle">Cosa Dicono di Noi</span><h2 class="section-title">Recensioni</h2></div>
@@ -180,7 +180,6 @@
       </div>
     </section>
 
-    <!-- CONTATTI -->
     <section class="contact-section" id="contact">
       <div class="container">
         <div class="text-center"><span class="section-subtitle">Vieni a Trovarci</span><h2 class="section-title">Contatti e Mappa</h2></div>
@@ -193,7 +192,6 @@
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="container">
     <div class="row">
@@ -205,10 +203,8 @@
   </div>
 </footer>
 
-<!-- WHATSAPP -->
 <a href="https://wa.me/393403046310?text=Ciao!%20Vorrei%20prenotare%20per%20la%20Festa%20dell'Unit%C3%A0" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
-<!-- MODALE PRENOTAZIONE -->
 <div class="modal-overlay" id="bookingModal">
   <div class="modal-content">
     <div class="modal-header"><h3><i class="fas fa-calendar-check me-2"></i>Prenota per la Festa</h3><button class="close-btn" onclick="closeBookingModal()">&times;</button></div>
