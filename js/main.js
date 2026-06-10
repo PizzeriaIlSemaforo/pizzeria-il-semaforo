@@ -1,61 +1,103 @@
 // JavaScript per Pizzeria Il Semaforo - Festa dell'Unità
 
 // ============================================
-// PAGINE MENÙ
+// PAGINA MENÙ NORMALE (DISABILITATO IN MODO ELEGANTE)
 // ============================================
 
-// Pagina MENÙ NORMALE (Giro Pizza NON DISPONIBILE)
 const menuNormalePage = `
+  <style>
+    .menu-disabled-wrapper {
+      position: relative;
+    }
+    .menu-disabled-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+    }
+    .suspended-badge {
+      background: linear-gradient(135deg, #c62828, #8e0000);
+      color: white;
+      padding: 20px 40px;
+      border-radius: 60px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      animation: pulseSuspended 1.5s infinite;
+    }
+    .suspended-badge i {
+      font-size: 1.8rem;
+      margin-right: 12px;
+    }
+    .suspended-badge small {
+      display: block;
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-top: 8px;
+    }
+    @keyframes pulseSuspended {
+      0% { transform: scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+      50% { transform: scale(1.02); box-shadow: 0 15px 40px rgba(198,40,40,0.5); }
+      100% { transform: scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+    }
+  </style>
+  
   <section class="menu-section" id="menu-page" style="padding-top: 60px;">
     <div class="container">
       <div class="text-center mb-5">
         <span class="section-subtitle">Il Nostro Menù</span>
-        <h2 class="section-title">Menù <span style="text-decoration: line-through;">Originale</span></h2>
-        <p class="section-description" style="color: #c62828; font-weight: bold;">
-          <i class="fas fa-info-circle"></i> Durante la Festa dell'Unità (11-21 Giugno) viene servito esclusivamente il Menù Speciale Festa.
+        <h2 class="section-title">Menù Regolare</h2>
+        <div style="width: 60px; height: 3px; background: #ccc; margin: 10px auto;"></div>
+        <p class="section-description" style="color: #c62828; font-weight: 500;">
+          <i class="fas fa-calendar-alt me-2"></i>Dall'11 al 21 giugno celebriamo la Festa dell'Unità con un menù speciale
         </p>
       </div>
       
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="menu-category-card non-disponibile">
-            <h3><i class="fas fa-utensils me-2 text-primary"></i>Antipasti</h3>
-            <div class="menu-item">
-              <h4>Antipasto della Casa</h4>
-              <p>Selezione di salumi toscani, schiacciata calda, verdure sott'olio</p>
-            </div>
-          </div>
-          
-          <div class="menu-category-card non-disponibile">
-            <h3><i class="fas fa-pizza-slice me-2 text-primary"></i>Pizze</h3>
-            <div class="menu-item">
-              <h4>🍕 GIRO PIZZA NO STOP 🍕</h4>
-              <p>Un viaggio attraverso i sapori della tradizione. Richiedi i gusti e crea la tua selezione</p>
-            </div>
-            <div class="menu-badge">
-              <span class="badge bg-primary">A volontà</span>
-            </div>
-            <div class="alert alert-warning mt-3 text-center" style="background: #fff3cd; border-radius: 10px; padding: 8px;">
-              <i class="fas fa-ban text-danger me-1"></i> 
-              <strong>NON DISPONIBILE DURANTE LA FESTA DELL'UNITÀ</strong>
-              <i class="fas fa-ban text-danger ms-1"></i>
-            </div>
+      <div class="menu-disabled-wrapper position-relative">
+        <div class="menu-disabled-overlay">
+          <div class="suspended-badge">
+            <i class="fas fa-pause-circle"></i> MENÙ TEMPORANEAMENTE SOSPESO
+            <small>Scopri il nostro Menù Speciale Festa dell'Unità!</small>
           </div>
         </div>
         
-        <div class="col-lg-6">
-          <div class="menu-category-card non-disponibile">
-            <h3><i class="fas fa-cake me-2 text-primary"></i>Dolci</h3>
-            <div class="menu-item"><div class="d-flex justify-content-between align-items-center"><h4>Tiramisù Classico</h4><span class="menu-price">€ 3,00</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between align-items-center"><h4>Panna Cotta ai Frutti di Bosco</h4><span class="menu-price">€ 3,00</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between align-items-center"><h4>Torta della Nonna</h4><span class="menu-price">€ 3,00</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between align-items-center"><h4>Sorbetto al Limone</h4><span class="menu-price">€ 3,00</span></div></div>
+        <div class="row" style="opacity: 0.3; pointer-events: none;">
+          <div class="col-lg-6">
+            <div class="menu-category-card">
+              <h3><i class="fas fa-utensils me-2 text-primary"></i>Antipasti</h3>
+              <div class="menu-item">
+                <h4>Antipasto della Casa</h4>
+                <p>Selezione di salumi toscani, schiacciata calda, verdure sott'olio</p>
+              </div>
+            </div>
+            <div class="menu-category-card">
+              <h3><i class="fas fa-pizza-slice me-2 text-primary"></i>Pizze</h3>
+              <div class="menu-item">
+                <h4>🍕 GIRO PIZZA NO STOP 🍕</h4>
+                <p>Un viaggio attraverso i sapori della tradizione</p>
+              </div>
+              <div class="menu-badge"><span class="badge bg-primary">A volontà</span></div>
+            </div>
           </div>
-          
-          <div class="menu-category-card non-disponibile">
-            <h3><i class="fas fa-wine-bottle me-2 text-primary"></i>Bevande</h3>
-            <div class="menu-item"><div class="d-flex justify-content-between align-items-center"><h4>Bibite (33cl)</h4><span class="menu-price">Incluse*</span></div><p class="text-muted small">Coca-Cola, Fanta, Sprite, Acqua</p></div>
-            <p class="menu-note mt-3"><i class="fas fa-info-circle text-primary me-1"></i>*Nel menù fisso è inclusa 1 bibita piccola a persona</p>
+          <div class="col-lg-6">
+            <div class="menu-category-card">
+              <h3><i class="fas fa-cake me-2 text-primary"></i>Dolci</h3>
+              <div class="menu-item"><div class="d-flex justify-content-between"><h4>Tiramisù Classico</h4><span class="menu-price">€ 3,00</span></div></div>
+              <div class="menu-item"><div class="d-flex justify-content-between"><h4>Panna Cotta</h4><span class="menu-price">€ 3,00</span></div></div>
+            </div>
+            <div class="menu-category-card">
+              <h3><i class="fas fa-wine-bottle me-2 text-primary"></i>Bevande</h3>
+              <div class="menu-item"><div class="d-flex justify-content-between"><h4>Bibite (33cl)</h4><span class="menu-price">Incluse</span></div></div>
+            </div>
           </div>
         </div>
       </div>
@@ -63,84 +105,138 @@ const menuNormalePage = `
   </section>
 `;
 
-// Pagina MENÙ SPECIALE FESTA DELL'UNITÀ
+// ============================================
+// PAGINA MENÙ FESTA DELL'UNITÀ (ORGANIZZATO E COMPLETO)
+// ============================================
+
 const menuFestaPage = `
-  <section class="menu-section" id="menu-festa-page" style="padding-top: 60px; background: linear-gradient(135deg, #fff8f0, #fff0e0);">
+  <style>
+    .festa-header { text-align: center; margin-bottom: 60px; }
+    .festa-badge { display: inline-block; background: linear-gradient(135deg, #cc0000, #009900); padding: 8px 30px; border-radius: 50px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+    .festa-badge span { color: white; font-weight: 700; letter-spacing: 3px; font-size: 0.85rem; }
+    .festa-title { font-size: 3.2rem; font-weight: 800; font-family: 'Playfair Display', serif; margin-bottom: 15px; }
+    .festa-title span { color: #cc0000; }
+    .festa-subtitle { max-width: 650px; margin: 0 auto 20px; color: #666; font-size: 1.1rem; }
+    .festa-divider { width: 120px; height: 4px; background: linear-gradient(90deg, #cc0000, #ff8c00, #009900); margin: 0 auto; border-radius: 2px; }
+    
+    .festa-category { margin-bottom: 50px; }
+    .festa-category-title { background: linear-gradient(135deg, #2c2c2c, #1a1a1a); border-radius: 15px; padding: 12px 25px; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    .festa-category-title i { color: #cc0000; font-size: 1.6rem; }
+    .festa-category-title h3 { color: white; margin: 0; font-size: 1.4rem; font-weight: 600; }
+    
+    .festa-card { background: white; border-radius: 16px; padding: 18px 22px; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; border-left: 4px solid #cc0000; }
+    .festa-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .festa-card-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-bottom: 8px; }
+    .festa-card-header h4 { font-size: 1.15rem; font-weight: 700; margin: 0; color: #2d2d2d; }
+    .festa-price { font-size: 1.2rem; font-weight: 800; color: #cc0000; }
+    .festa-desc { color: #777; font-size: 0.85rem; margin: 0; line-height: 1.4; }
+    .festa-badge-small { display: inline-block; background: linear-gradient(135deg, #cc0000, #009900); color: white; font-size: 0.7rem; padding: 3px 12px; border-radius: 20px; margin-top: 8px; }
+    .festa-card-special { background: linear-gradient(135deg, #fff8f0, #fff0e0); border-left: 4px solid #ff8c00; }
+    
+    @media (max-width: 768px) {
+      .festa-title { font-size: 2.2rem; }
+      .festa-category-title h3 { font-size: 1.2rem; }
+      .festa-card-header h4 { font-size: 1rem; }
+      .festa-card { padding: 12px 16px; }
+    }
+  </style>
+  
+  <section style="padding: 80px 0; background: linear-gradient(135deg, #fffaf5 0%, #fef5e8 100%);">
     <div class="container">
-      <div class="text-center mb-5">
-        <span class="section-subtitle" style="color: #cc0000;">✨ Menù Esclusivo ✨</span>
-        <h2 class="section-title">Menù Speciale <span style="color: #cc0000;">Festa dell'Unità</span></h2>
-        <p class="section-description">Piatti tradizionali toscani preparati con passione per celebrare insieme questa festa!</p>
-        <div style="width: 80px; height: 3px; background: linear-gradient(90deg, #cc0000, #009900); margin: 20px auto;"></div>
+      
+      <!-- HEADER -->
+      <div class="festa-header">
+        <div class="festa-badge"><span>✨ MENÙ ESCLUSIVO ✨</span></div>
+        <h2 class="festa-title">Festa dell'<span>Unità</span></h2>
+        <p class="festa-subtitle">Piatti tradizionali toscani preparati con passione per celebrare insieme questa festa speciale</p>
+        <div class="festa-divider"></div>
       </div>
 
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="menu-category-card menu-speciale-card" style="border-left: 5px solid #cc0000;">
-            <h3><i class="fas fa-utensils text-primary me-2"></i>Antipasti della Festa</h3>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Antipasto Toscano <span class="badge badge-festa">Specialità</span></h4><span class="menu-price">€ 8,00</span></div><p class="text-muted small">Salame, Finocchiona, Crudo, Pecorino, Crostino al Pomodoro</p></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Polenta al Forno con Funghi</h4><span class="menu-price">€ 4,50</span></div><p class="text-muted small">Funghi misti di stagione</p></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Crostini Toscani</h4><span class="menu-price">€ 5,00</span></div><p class="text-muted small">Fegatini, Salsiccia e Stracchini, Lardo di Colonnata</p></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Prosciutto e Melone</h4><span class="menu-price">€ 6,50</span></div><p class="text-muted small">Prosciutto stagionato</p></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Polenta Fritta</h4><span class="menu-price">€ 3,50</span></div></div>
-          </div>
+      <!-- ANTIPASTI -->
+      <div class="festa-category">
+        <div class="festa-category-title"><i class="fas fa-utensils"></i><h3>Antipasti della Festa</h3></div>
+        <div class="row">
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Antipasto Toscano</h4><span class="festa-price">€ 8,00</span></div><p class="festa-desc">Salame, Finocchiona, Crudo, Pecorino, Crostino al Pomodoro</p><span class="festa-badge-small">Specialità</span></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Polenta al Forno con Funghi</h4><span class="festa-price">€ 4,50</span></div><p class="festa-desc">Funghi misti di stagione</p></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Crostini Toscani</h4><span class="festa-price">€ 5,00</span></div><p class="festa-desc">Fegatini, Salsiccia e Stracchini, Lardo di Colonnata</p></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Prosciutto e Melone</h4><span class="festa-price">€ 6,50</span></div><p class="festa-desc">Prosciutto stagionato</p></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Polenta Fritta</h4><span class="festa-price">€ 3,50</span></div></div></div>
         </div>
+      </div>
 
-        <div class="col-lg-6">
-          <div class="menu-category-card menu-speciale-card" style="border-left: 5px solid #009900;">
-            <h3><i class="fas fa-pasta text-primary me-2"></i>Primi della Festa</h3>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Penne alla Pecora</h4><span class="menu-price">€ 8,00</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Tortiglioni alla Carrettiera</h4><span class="menu-price">€ 4,50</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Tagliatelle al Ragù</h4><span class="menu-price">€ 5,00</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Tortelli Ricotta e Spinaci</h4><span class="menu-price">€ 6,50</span></div><p class="text-muted small">Burro e Salvia</p></div>
-          </div>
+      <!-- PRIMI PIATTI -->
+      <div class="festa-category">
+        <div class="festa-category-title"><i class="fas fa-pasta"></i><h3>Primi Piatti della Festa</h3></div>
+        <div class="row">
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Penne alla Pecora</h4><span class="festa-price">€ 8,00</span></div></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Tortiglioni alla Carrettiera</h4><span class="festa-price">€ 4,50</span></div></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Tagliatelle al Ragù</h4><span class="festa-price">€ 5,00</span></div></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Tortelli Ricotta e Spinaci</h4><span class="festa-price">€ 6,50</span></div><p class="festa-desc">Burro e Salvia</p></div></div>
         </div>
+      </div>
 
-        <div class="col-lg-6">
-          <div class="menu-category-card menu-speciale-card" style="border-left: 5px solid #cc0000;">
-            <h3><i class="fas fa-grill text-primary me-2"></i>Secondi della Festa</h3>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Grigliata Mista <span class="badge badge-festa">Specialità</span></h4><span class="menu-price">€ 15,00</span></div><p class="text-muted small">Pollo, Rosticciana, Salsiccia</p></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Galletto al Mattone</h4><span class="menu-price">€ 12,00</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Rosticciana</h4><span class="menu-price">€ 10,00</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Pecora in Umido</h4><span class="menu-price">€ 15,00</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Salsiccia alla Griglia</h4><span class="menu-price">€ 9,00</span></div></div>
-          </div>
+      <!-- SECONDI PIATTI -->
+      <div class="festa-category">
+        <div class="festa-category-title"><i class="fas fa-grill"></i><h3>Secondi Piatti della Festa</h3></div>
+        <div class="row">
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Grigliata Mista</h4><span class="festa-price">€ 15,00</span></div><p class="festa-desc">Pollo, Rosticciana, Salsiccia</p><span class="festa-badge-small">Specialità</span></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Galletto al Mattone</h4><span class="festa-price">€ 12,00</span></div></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Rosticciana</h4><span class="festa-price">€ 10,00</span></div></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Pecora in Umido</h4><span class="festa-price">€ 15,00</span></div></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Salsiccia alla Griglia</h4><span class="festa-price">€ 9,00</span></div></div></div>
         </div>
+      </div>
 
-        <div class="col-lg-6">
-          <div class="menu-category-card menu-speciale-card" style="border-left: 5px solid #009900;">
-            <h3><i class="fas fa-leaf text-primary me-2"></i>Contorni</h3>
-            <div class="row">
-              <div class="col-4"><div class="menu-item"><h4>Fagioli all'Olio</h4><span class="menu-price">€ 4,00</span></div></div>
-              <div class="col-4"><div class="menu-item"><h4>Patate Arrosto</h4><span class="menu-price">€ 4,00</span></div></div>
-              <div class="col-4"><div class="menu-item"><h4>Insalata Mista</h4><span class="menu-price">€ 4,00</span></div></div>
-            </div>
-          </div>
-
-          <div class="menu-category-card menu-speciale-card" style="background: linear-gradient(135deg, #fff, #fef5f0);">
-            <h3><i class="fas fa-fish text-primary me-2"></i>Frittura di Mare</h3>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Calamari e Gamberi con verdure e patate fritte <span class="badge bg-warning text-dark">Venerdì su prenotazione</span></h4><span class="menu-price">€ 20,00</span></div></div>
-          </div>
-
-          <div class="menu-category-card menu-speciale-card">
-            <h3><i class="fas fa-wine-bottle text-primary me-2"></i>Bevande</h3>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Acqua Naturale/Gassata (1 Lt)</h4><span class="menu-price">€ 2,00</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Acqua Naturale/Gassata (0.5 Lt)</h4><span class="menu-price">€ 1,30</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Lattine Coca Cola / Fanta (0.33)</h4><span class="menu-price">€ 2,50</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Birra Nazionale Spina Piccola (0.20)</h4><span class="menu-price">€ 3,00</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Birra Nazionale Spina Media (0.40)</h4><span class="menu-price">€ 5,00</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Vino Rosso (Bottiglia 0.75)</h4><span class="menu-price">€ 7,00</span></div></div>
-          </div>
-
-          <div class="menu-category-card menu-speciale-card">
-            <h3><i class="fas fa-ice-cream text-primary me-2"></i>Dolci & Caffè</h3>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Tiramisù Classico</h4><span class="menu-price">€ 3,00</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Cocomero</h4><span class="menu-price">€ 2,50</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Macedonia di Frutta</h4><span class="menu-price">€ 3,50</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Caffè Espresso</h4><span class="menu-price">€ 2,00</span></div></div>
-            <div class="menu-item"><div class="d-flex justify-content-between flex-wrap"><h4>Coperto e Pane</h4><span class="menu-price">€ 2,00</span></div></div>
-          </div>
+      <!-- CONTORNI -->
+      <div class="festa-category">
+        <div class="festa-category-title"><i class="fas fa-leaf"></i><h3>Contorni</h3></div>
+        <div class="row">
+          <div class="col-md-4"><div class="festa-card"><div class="festa-card-header"><h4>Fagioli all'Olio</h4><span class="festa-price">€ 4,00</span></div></div></div>
+          <div class="col-md-4"><div class="festa-card"><div class="festa-card-header"><h4>Patate Arrosto</h4><span class="festa-price">€ 4,00</span></div></div></div>
+          <div class="col-md-4"><div class="festa-card"><div class="festa-card-header"><h4>Insalata Mista</h4><span class="festa-price">€ 4,00</span></div></div></div>
         </div>
+      </div>
+
+      <!-- FRITTURA DI MARE -->
+      <div class="festa-category">
+        <div class="festa-category-title"><i class="fas fa-fish"></i><h3>Frittura di Mare</h3></div>
+        <div class="row">
+          <div class="col-12"><div class="festa-card festa-card-special"><div class="festa-card-header"><h4>Calamari e Gamberi con verdure e patate fritte</h4><span class="festa-price">€ 20,00</span></div><p class="festa-desc">Servita solo il venerdì sera su prenotazione</p><span class="festa-badge-small">Prenotazione obbligatoria</span></div></div>
+        </div>
+      </div>
+
+      <!-- BEVANDE -->
+      <div class="festa-category">
+        <div class="festa-category-title"><i class="fas fa-wine-bottle"></i><h3>Bevande</h3></div>
+        <div class="row">
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Acqua Naturale/Gassata (1 Lt)</h4><span class="festa-price">€ 2,00</span></div></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Acqua Naturale/Gassata (0.5 Lt)</h4><span class="festa-price">€ 1,30</span></div></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Lattine Coca Cola / Fanta</h4><span class="festa-price">€ 2,50</span></div></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Lattine Thè Pesca/Limone</h4><span class="festa-price">€ 3,00</span></div></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Birra Nazionale Spina Piccola</h4><span class="festa-price">€ 3,00</span></div></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Birra Nazionale Spina Media</h4><span class="festa-price">€ 5,00</span></div></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Vino Rosso (Bottiglia 0.75)</h4><span class="festa-price">€ 7,00</span></div></div></div>
+          <div class="col-md-6"><div class="festa-card"><div class="festa-card-header"><h4>Vino Bianco Frizzante (Brocca 0.50)</h4><span class="festa-price">€ 6,00</span></div></div></div>
+        </div>
+      </div>
+
+      <!-- DOLCI E CAFFÈ -->
+      <div class="festa-category">
+        <div class="festa-category-title"><i class="fas fa-ice-cream"></i><h3>Dolci & Caffè</h3></div>
+        <div class="row">
+          <div class="col-md-4"><div class="festa-card"><div class="festa-card-header"><h4>Tiramisù Classico</h4><span class="festa-price">€ 3,00</span></div></div></div>
+          <div class="col-md-4"><div class="festa-card"><div class="festa-card-header"><h4>Cocomero</h4><span class="festa-price">€ 2,50</span></div></div></div>
+          <div class="col-md-4"><div class="festa-card"><div class="festa-card-header"><h4>Macedonia di Frutta</h4><span class="festa-price">€ 3,50</span></div></div></div>
+          <div class="col-md-4"><div class="festa-card"><div class="festa-card-header"><h4>Macedonia con Gelato</h4><span class="festa-price">€ 5,50</span></div></div></div>
+          <div class="col-md-4"><div class="festa-card"><div class="festa-card-header"><h4>Macedonia con Panna</h4><span class="festa-price">€ 4,50</span></div></div></div>
+          <div class="col-md-4"><div class="festa-card"><div class="festa-card-header"><h4>Caffè Espresso</h4><span class="festa-price">€ 2,00</span></div></div></div>
+          <div class="col-md-12"><div class="festa-card"><div class="festa-card-header"><h4>Coperto e Pane</h4><span class="festa-price">€ 2,00</span></div></div></div>
+        </div>
+      </div>
+      
+      <!-- NOTA BENE -->
+      <div class="text-center mt-5 pt-3">
+        <p style="color: #888; font-size: 0.85rem;"><i class="fas fa-info-circle me-1"></i> I prezzi si intendono IVA inclusa. La frittura di mare è disponibile solo il venerdì sera su prenotazione.</p>
       </div>
     </div>
   </section>
@@ -234,7 +330,7 @@ const FESTA_INIZIO = new Date(2026, 5, 11, 19, 0, 0);
 const FESTA_FINE = new Date(2026, 5, 21, 1, 0, 0);
 
 // ============================================
-// COUNTDOWN INTELLIGENTE
+// COUNTDOWN INTELLIGENTE CON SECONDII
 // ============================================
 
 function updateSmartCountdown() {
@@ -247,17 +343,19 @@ function updateSmartCountdown() {
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        countdownElement.innerHTML = `⏳ Inizia tra: ${days}g ${hours}h ${minutes}m`;
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        countdownElement.innerHTML = `⏳ Inizia tra: ${days}g ${hours}h ${minutes}m ${seconds}s`;
     }
     else if (now >= FESTA_INIZIO && now < FESTA_FINE) {
         const diff = FESTA_FINE - now;
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        countdownElement.innerHTML = `🎉 FESTA IN CORSO! Termina tra: ${days}g ${hours}h ${minutes}m 🎉`;
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        countdownElement.innerHTML = `🎉 FESTA IN CORSO! Termina tra: ${days}g ${hours}h ${minutes}m ${seconds}s 🎉`;
     }
     else {
-        countdownElement.innerHTML = `🏁 Festa terminata! Grazie! 🎊`;
+        countdownElement.innerHTML = `🏁 Festa terminata! Grazie per aver partecipato! 🎊`;
     }
 }
 
@@ -276,7 +374,6 @@ function loadPage(pageId) {
     const mainContent = document.getElementById('main-content');
     const navLinks = document.querySelectorAll('[data-page]');
     
-    // Aggiorna classe active
     navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('data-page') === pageId) {
@@ -314,7 +411,6 @@ function loadPage(pageId) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
-    // Chiudi menu mobile
     const navbarCollapse = document.querySelector('.navbar-collapse');
     if (navbarCollapse) navbarCollapse.classList.remove('show');
 }
@@ -327,12 +423,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const homeSections = document.getElementById('home-sections');
     const navLinks = document.querySelectorAll('[data-page]');
     
-    // SALVA l'HTML originale
     const heroSection = document.querySelector('.hero-section');
     if (heroSection) originalHeroHTML = heroSection.outerHTML;
     if (homeSections) originalHomeSectionsHTML = homeSections.innerHTML;
     
-    // Aggiungi event listeners a tutti i link
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -341,7 +435,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Home link
     const homeLink = document.getElementById('home-link');
     if (homeLink) {
         homeLink.addEventListener('click', function(e) {
@@ -350,7 +443,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Navbar scroll effect
     window.addEventListener('scroll', function() {
         const navbar = document.querySelector('.navbar');
         if (window.scrollY > 50) {
@@ -360,9 +452,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Avvia countdown (aggiorna ogni minuto)
     updateSmartCountdown();
-    setInterval(updateSmartCountdown, 60000);
+    setInterval(updateSmartCountdown, 1000); // aggiorna ogni secondo per i secondi
 });
 
 // ============================================
