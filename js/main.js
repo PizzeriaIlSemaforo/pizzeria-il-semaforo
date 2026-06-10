@@ -82,12 +82,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('[data-page]');
     
     // SALVA l'HTML originale ALL'INIZIO
-    originalHeroHTML = document.querySelector('.hero-section').outerHTML;
-    originalHomeSectionsHTML = homeSections.innerHTML;
+    const heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+        originalHeroHTML = heroSection.outerHTML;
+    }
+    if (homeSections) {
+        originalHomeSectionsHTML = homeSections.innerHTML;
+    }
     
     // Funzione per ricostruire la home COMPLETAMENTE
     function ricostruisciHome() {
-        mainContent.innerHTML = originalHeroHTML + originalHomeSectionsHTML;
+        if (mainContent && originalHeroHTML && originalHomeSectionsHTML) {
+            mainContent.innerHTML = originalHeroHTML + originalHomeSectionsHTML;
+        }
     }
     
     // Funzione per caricare una pagina
@@ -101,11 +108,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         if (pageId === 'home') {
-            // Ricostruisce la home completa dall'originale
             ricostruisciHome();
         } 
         else if (pageId === 'menu') {
-            // Ricostruisci home e scrolla a menu
             ricostruisciHome();
             setTimeout(() => {
                 const menuSection = document.getElementById('menu');
@@ -113,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 150);
         }
         else if (pageId === 'reviews') {
-            // Ricostruisci home e scrolla a recensioni
             ricostruisciHome();
             setTimeout(() => {
                 const reviewsSection = document.getElementById('reviews');
@@ -121,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 150);
         }
         else if (pageId === 'contact') {
-            // Ricostruisci home e scrolla a contatti
             ricostruisciHome();
             setTimeout(() => {
                 const contactSection = document.getElementById('contact');
@@ -129,7 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 150);
         }
         else if (specialPages[pageId]) {
-            // Carica pagina speciale (about o gallery)
             mainContent.innerHTML = specialPages[pageId];
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
