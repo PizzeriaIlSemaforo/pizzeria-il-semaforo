@@ -1,6 +1,5 @@
-// JavaScript per Pizzeria Il Semaforo
+// JavaScript per Pizzeria Il Semaforo - Festa dell'Unità
 
-// Pagine speciali (Chi Siamo e Galleria) - si aprono come pagine separate
 const specialPages = {
     about: `
         <section class="about-section" id="about">
@@ -19,78 +18,37 @@ const specialPages = {
                         <div class="about-content">
                             <span class="section-subtitle">La Nostra Storia</span>
                             <h2 class="section-title">Un Sogno di Famiglia Diventato Realtà</h2>
-                            <p class="about-text">Circa un anno fa, la nostra pizzeria è nata da un sogno condiviso da una famiglia molto unita. Provenivamo da un altro settore, ma la nostra passione per la cucina e l'amore per la tradizione ci hanno spinti a intraprendere questa nuova avventura.</p>
+                            <p class="about-text">Circa un anno fa, la nostra trattoria è nata da un sogno condiviso da una famiglia molto unita. Provenivamo da un altro settore, ma la nostra passione per la cucina e l'amore per la tradizione ci hanno spinti a intraprendere questa nuova avventura.</p>
                             <p class="about-text">Non è stato un percorso facile; ci sono stati sacrifici, lunghe giornate di lavoro e momenti di grande impegno da parte di tutti noi, dai ragazzi ai cuochi. Tuttavia, con determinazione e tanto lavoro, siamo riusciti a trasformare il nostro sogno in realtà.</p>
                             <div class="about-stats">
-                                <div class="stat-item">
-                                    <span class="stat-number">10+</span>
-                                    <span class="stat-label">Tipi di Pizza</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-number">100%</span>
-                                    <span class="stat-label">Familiare</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-number">20€</span>
-                                    <span class="stat-label">Menù Fisso</span>
-                                </div>
+                                <div class="stat-item"><span class="stat-number">15+</span><span class="stat-label">Piatti Tipici</span></div>
+                                <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Familiare</span></div>
+                                <div class="stat-item"><span class="stat-number">15€</span><span class="stat-label">Offerta Festa</span></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        
         <section class="info-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-lg-3">
-                        <div class="info-card">
-                            <div class="info-icon"><i class="fas fa-clock"></i></div>
-                            <h3>Orari di Apertura</h3>
-                            <p>Giovedì - Domenica</p>
-                            <p class="info-highlight">19:00 - 23:00</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="info-card">
-                            <div class="info-icon"><i class="fas fa-euro-sign"></i></div>
-                            <h3>Menù Fisso</h3>
-                            <p>Antipasto + Giro Pizza</p>
-                            <p class="info-highlight">20€</p>
-                            <small>Include 1 bibita 33cl</small>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="info-card">
-                            <div class="info-icon"><i class="fas fa-music"></i></div>
-                            <h3>Musica dal Vivo</h3>
-                            <p>Venerdì e Domenica</p>
-                            <p class="info-highlight">Karaoke</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="info-card">
-                            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
-                            <h3>Prenotazioni</h3>
-                            <p>Chiama o WhatsApp</p>
-                            <p class="info-highlight">340 304 6310</p>
-                        </div>
-                    </div>
+                    <div class="col-md-6 col-lg-3"><div class="info-card"><div class="info-icon"><i class="fas fa-clock"></i></div><h3>Orari Festa</h3><p>11-21 Giugno</p><p class="info-highlight">19:00 - 01:00</p></div></div>
+                    <div class="col-md-6 col-lg-3"><div class="info-card"><div class="info-icon"><i class="fas fa-euro-sign"></i></div><h3>Menù Completo</h3><p>Antipasti, Primi, Secondi</p><p class="info-highlight">Da €4,50</p><small>Piatti della tradizione</small></div></div>
+                    <div class="col-md-6 col-lg-3"><div class="info-card"><div class="info-icon"><i class="fas fa-music"></i></div><h3>Musica dal Vivo</h3><p>Venerdì e Domenica</p><p class="info-highlight">Karaoke</p></div></div>
+                    <div class="col-md-6 col-lg-3"><div class="info-card"><div class="info-icon"><i class="fas fa-phone-alt"></i></div><h3>Prenotazioni</h3><p>Chiama o WhatsApp</p><p class="info-highlight">340 304 6310</p></div></div>
                 </div>
             </div>
         </section>
     `,
-    
     gallery: `
         <section class="gallery-section" id="gallery">
             <div class="container">
                 <div class="section-header text-center">
                     <span class="section-subtitle">I Nostri Scatti</span>
                     <h2 class="section-title">Galleria</h2>
-                    <p class="section-description">Momenti di convivialità e sapori nel nostro locale</p>
+                    <p class="section-description">Momenti di convivialità e sapori nel nostro locale durante la Festa dell'Unità</p>
                 </div>
-                
                 <div class="gallery-grid">
                     <div class="gallery-item"><img src="images/1.jpeg" alt="Foto 1" loading="lazy"></div>
                     <div class="gallery-item"><img src="images/2.jpeg" alt="Foto 2" loading="lazy"></div>
@@ -114,14 +72,23 @@ const specialPages = {
     `
 };
 
+// Variabili globali per salvare l'HTML originale
+let originalHeroHTML = '';
+let originalHomeSectionsHTML = '';
+
 document.addEventListener('DOMContentLoaded', function() {
     const mainContent = document.getElementById('main-content');
     const homeSections = document.getElementById('home-sections');
     const navLinks = document.querySelectorAll('[data-page]');
     
-    // Salva l'HTML originale delle sezioni home
-    const homeSectionsHTML = homeSections.innerHTML;
-    const heroSectionHTML = document.querySelector('.hero-section').outerHTML;
+    // SALVA l'HTML originale ALL'INIZIO
+    originalHeroHTML = document.querySelector('.hero-section').outerHTML;
+    originalHomeSectionsHTML = homeSections.innerHTML;
+    
+    // Funzione per ricostruire la home COMPLETAMENTE
+    function ricostruisciHome() {
+        mainContent.innerHTML = originalHeroHTML + originalHomeSectionsHTML;
+    }
     
     // Funzione per caricare una pagina
     function loadPage(pageId) {
@@ -134,38 +101,42 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         if (pageId === 'home') {
-            // Ricostruisce la home completa
-            mainContent.innerHTML = heroSectionHTML + homeSectionsHTML;
+            // Ricostruisce la home completa dall'originale
+            ricostruisciHome();
         } 
         else if (pageId === 'menu') {
-            // Mostra home e scrolla a menu
-            mainContent.innerHTML = heroSectionHTML + homeSectionsHTML;
+            // Ricostruisci home e scrolla a menu
+            ricostruisciHome();
             setTimeout(() => {
-                document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
+                const menuSection = document.getElementById('menu');
+                if (menuSection) menuSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 150);
         }
         else if (pageId === 'reviews') {
-            // Mostra home e scrolla a reviews
-            mainContent.innerHTML = heroSectionHTML + homeSectionsHTML;
+            // Ricostruisci home e scrolla a recensioni
+            ricostruisciHome();
             setTimeout(() => {
-                document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
+                const reviewsSection = document.getElementById('reviews');
+                if (reviewsSection) reviewsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 150);
         }
         else if (pageId === 'contact') {
-            // Mostra home e scrolla a contact
-            mainContent.innerHTML = heroSectionHTML + homeSectionsHTML;
+            // Ricostruisci home e scrolla a contatti
+            ricostruisciHome();
             setTimeout(() => {
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
+                const contactSection = document.getElementById('contact');
+                if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 150);
         }
         else if (specialPages[pageId]) {
-            // Carica pagina speciale (about o gallery) - SOLO quella sezione
+            // Carica pagina speciale (about o gallery)
             mainContent.innerHTML = specialPages[pageId];
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
         // Chiudi menu mobile
-        document.querySelector('.navbar-collapse')?.classList.remove('show');
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        if (navbarCollapse) navbarCollapse.classList.remove('show');
     }
     
     // Aggiungi event listeners a tutti i link
@@ -178,10 +149,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Home link
-    document.getElementById('home-link')?.addEventListener('click', function(e) {
-        e.preventDefault();
-        loadPage('home');
-    });
+    const homeLink = document.getElementById('home-link');
+    if (homeLink) {
+        homeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            loadPage('home');
+        });
+    }
     
     // Navbar scroll effect
     window.addEventListener('scroll', function() {
@@ -196,18 +170,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Funzioni per il modale
 function openBookingModal() {
-    document.getElementById('bookingModal').classList.add('show');
-    document.body.style.overflow = 'hidden';
+    const modal = document.getElementById('bookingModal');
+    if (modal) {
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
 }
 
 function closeBookingModal() {
-    document.getElementById('bookingModal').classList.remove('show');
-    document.body.style.overflow = 'auto';
+    const modal = document.getElementById('bookingModal');
+    if (modal) {
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto';
+    }
 }
 
 // Chiudi modale cliccando fuori
 window.addEventListener('click', function(e) {
-    if (e.target === document.getElementById('bookingModal')) {
+    const modal = document.getElementById('bookingModal');
+    if (e.target === modal) {
         closeBookingModal();
     }
 });
