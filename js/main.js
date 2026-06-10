@@ -230,8 +230,8 @@ let originalHeroHTML = '';
 let originalHomeSectionsHTML = '';
 
 // Date della festa
-const FESTA_INIZIO = new Date(2026, 5, 11, 19, 0, 0);  // 11 Giugno 2026 ore 19:00
-const FESTA_FINE = new Date(2026, 5, 21, 1, 0, 0);     // 21 Giugno 2026 ore 01:00
+const FESTA_INIZIO = new Date(2026, 5, 11, 19, 0, 0);
+const FESTA_FINE = new Date(2026, 5, 21, 1, 0, 0);
 
 // ============================================
 // COUNTDOWN INTELLIGENTE
@@ -239,33 +239,25 @@ const FESTA_FINE = new Date(2026, 5, 21, 1, 0, 0);     // 21 Giugno 2026 ore 01:
 
 function updateSmartCountdown() {
     const now = new Date();
-    const countdownElement = document.getElementById('fullCountdown');
+    const countdownElement = document.getElementById('countdownDisplay');
     if (!countdownElement) return;
     
-    // Caso 1: Prima dell'inizio della festa
     if (now < FESTA_INIZIO) {
         const diff = FESTA_INIZIO - now;
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        countdownElement.innerHTML = `<i class="fas fa-hourglass-half me-1"></i> Inizia tra: ${days}g ${hours}h ${minutes}m`;
-        return;
+        countdownElement.innerHTML = `⏳ Inizia tra: ${days}g ${hours}h ${minutes}m`;
     }
-    
-    // Caso 2: Durante la festa
-    if (now >= FESTA_INIZIO && now < FESTA_FINE) {
+    else if (now >= FESTA_INIZIO && now < FESTA_FINE) {
         const diff = FESTA_FINE - now;
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        countdownElement.innerHTML = `<i class="fas fa-music me-1"></i> 🎉 FESTA IN CORSO! Termina tra: ${days}g ${hours}h ${minutes}m 🎉`;
-        return;
+        countdownElement.innerHTML = `🎉 FESTA IN CORSO! Termina tra: ${days}g ${hours}h ${minutes}m 🎉`;
     }
-    
-    // Caso 3: Festa terminata
-    if (now >= FESTA_FINE) {
-        countdownElement.innerHTML = `<i class="fas fa-flag-checkered me-1"></i> Festa terminata! Grazie per aver partecipato 🎊`;
-        return;
+    else {
+        countdownElement.innerHTML = `🏁 Festa terminata! Grazie! 🎊`;
     }
 }
 
@@ -287,7 +279,7 @@ function loadPage(pageId) {
     // Aggiorna classe active
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.dataset.page === pageId) {
+        if (link.getAttribute('data-page') === pageId) {
             link.classList.add('active');
         }
     });
@@ -306,16 +298,16 @@ function loadPage(pageId) {
     else if (pageId === 'reviews') {
         ricostruisciHome();
         setTimeout(() => {
-            const reviewsSection = document.getElementById('reviews');
-            if (reviewsSection) reviewsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 150);
+            const section = document.getElementById('reviews');
+            if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
     }
     else if (pageId === 'contact') {
         ricostruisciHome();
         setTimeout(() => {
-            const contactSection = document.getElementById('contact');
-            if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 150);
+            const section = document.getElementById('contact');
+            if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
     }
     else if (specialPages[pageId]) {
         mainContent.innerHTML = specialPages[pageId];
@@ -332,7 +324,6 @@ function loadPage(pageId) {
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    const mainContent = document.getElementById('main-content');
     const homeSections = document.getElementById('home-sections');
     const navLinks = document.querySelectorAll('[data-page]');
     
@@ -341,11 +332,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (heroSection) originalHeroHTML = heroSection.outerHTML;
     if (homeSections) originalHomeSectionsHTML = homeSections.innerHTML;
     
-    // Aggiungi event listeners
+    // Aggiungi event listeners a tutti i link
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            loadPage(this.dataset.page);
+            const pageId = this.getAttribute('data-page');
+            loadPage(pageId);
         });
     });
     
