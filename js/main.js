@@ -1,4 +1,5 @@
 // JavaScript per Pizzeria Il Semaforo - Festa dell'Unità
+// FULLY RESPONSIVE - Si adatta a tutte le dimensioni
 
 // ============================================
 // PAGINA MENÙ NORMALE (SOSPESO)
@@ -39,6 +40,11 @@ const menuNormalePage = `
       50% { transform: scale(1.02); }
       100% { transform: scale(1); }
     }
+    @media (max-width: 768px) {
+      .sospeso-badge { padding: 15px 25px; font-size: 1rem; }
+      .sospeso-badge i { font-size: 1.4rem; }
+      .sospeso-badge small { font-size: 0.7rem; }
+    }
   </style>
   <section class="menu-section" style="padding-top: 60px;">
     <div class="container">
@@ -68,7 +74,7 @@ const menuNormalePage = `
 `;
 
 // ============================================
-// PAGINA MENÙ FESTA DELL'UNITÀ (CARD STESSA ALTEZZA)
+// PAGINA MENÙ FESTA DELL'UNITÀ (RESPONSIVE)
 // ============================================
 
 const menuFestaPage = `
@@ -85,7 +91,7 @@ const menuFestaPage = `
     .festa-category-title i { color: #cc0000; font-size: 1.5rem; }
     .festa-category-title h3 { color: white; margin: 0; font-size: 1.3rem; font-weight: 600; }
     
-    /* CARD STESSA ALTEZZA - FLEXBOX PERFETTO */
+    /* CARD STESSA ALTEZZA - FLEXBOX RESPONSIVE */
     .festa-row {
       display: flex;
       flex-wrap: wrap;
@@ -126,13 +132,34 @@ const menuFestaPage = `
       display: flex;
     }
     
+    /* RESPONSIVE MENU FESTA */
+    @media (max-width: 992px) {
+      .festa-title { font-size: 2.5rem; }
+      .festa-category-title h3 { font-size: 1.1rem; }
+    }
+    
     @media (max-width: 768px) {
-      .festa-title { font-size: 2rem; }
-      .festa-category-title h3 { font-size: 1rem; }
+      .festa-title { font-size: 1.8rem; }
+      .festa-category-title { padding: 8px 15px; }
+      .festa-category-title h3 { font-size: 0.95rem; }
+      .festa-category-title i { font-size: 1.2rem; }
       .festa-col { flex: 0 0 100%; max-width: 100%; }
       .festa-col-3 { flex: 0 0 100%; max-width: 100%; }
-      .festa-card { padding: 10px 15px; min-height: auto; }
+      .festa-card { padding: 12px; min-height: auto; }
       .festa-card-header h4 { font-size: 0.9rem; }
+      .festa-price { font-size: 0.9rem; }
+      .festa-desc { font-size: 0.7rem; }
+      .festa-badge-small { font-size: 0.55rem; }
+      .festa-subtitle { font-size: 0.85rem; padding: 0 15px; }
+      .festa-header { padding: 0 10px; }
+      .festa-badge span { font-size: 0.7rem; }
+    }
+    
+    @media (max-width: 480px) {
+      .festa-title { font-size: 1.5rem; }
+      .festa-category-title h3 { font-size: 0.85rem; }
+      .festa-card-header h4 { font-size: 0.8rem; }
+      .festa-price { font-size: 0.8rem; }
     }
   </style>
   <section style="padding: 60px 0; background: linear-gradient(135deg, #fffaf5, #fef5e8);">
@@ -179,7 +206,7 @@ const menuFestaPage = `
         </div>
       </div>
 
-      <!-- CONTORNI (3 per riga) -->
+      <!-- CONTORNI (3 per riga responsive) -->
       <div class="festa-category">
         <div class="festa-category-title"><i class="fas fa-leaf"></i><h3>Contorni</h3></div>
         <div class="festa-row">
@@ -391,8 +418,11 @@ function loadPage(pageId) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
+    // Chiudi il menu mobile dopo il click
     const navbarCollapse = document.querySelector('.navbar-collapse');
-    if (navbarCollapse) navbarCollapse.classList.remove('show');
+    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+        navbarCollapse.classList.remove('show');
+    }
 }
 
 // ============================================
@@ -410,7 +440,10 @@ document.addEventListener('DOMContentLoaded', function() {
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            loadPage(this.getAttribute('data-page'));
+            const page = this.getAttribute('data-page');
+            if (page) {
+                loadPage(page);
+            }
         });
     });
     
@@ -424,25 +457,132 @@ document.addEventListener('DOMContentLoaded', function() {
     
     window.addEventListener('scroll', function() {
         const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 50) navbar.classList.add('scrolled');
-        else navbar.classList.remove('scrolled');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
     });
     
     updateSmartCountdown();
     setInterval(updateSmartCountdown, 1000);
+    
+    // Aggiungi gestione touch per dispositivi mobili
+    const infoCards = document.querySelectorAll('.info-card');
+    infoCards.forEach(card => {
+        card.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.98)';
+        });
+        card.addEventListener('touchend', function() {
+            this.style.transform = '';
+        });
+    });
 });
 
 // ============================================
-// MODALE
+// MODALE PRENOTAZIONE
 // ============================================
 
 function openBookingModal() {
     const modal = document.getElementById('bookingModal');
-    if (modal) { modal.classList.add('show'); document.body.style.overflow = 'hidden'; }
+    if (modal) { 
+        modal.classList.add('show'); 
+        document.body.style.overflow = 'hidden';
+        
+        // Previeni lo scroll sul body
+        document.body.addEventListener('touchmove', preventScroll, { passive: false });
+    }
 }
+
 function closeBookingModal() {
     const modal = document.getElementById('bookingModal');
-    if (modal) { modal.classList.remove('show'); document.body.style.overflow = 'auto'; }
+    if (modal) { 
+        modal.classList.remove('show'); 
+        document.body.style.overflow = 'auto';
+        
+        // Riabilita lo scroll
+        document.body.removeEventListener('touchmove', preventScroll);
+    }
 }
-window.addEventListener('click', function(e) { if (e.target === document.getElementById('bookingModal')) closeBookingModal(); });
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeBookingModal(); });
+
+function preventScroll(e) {
+    e.preventDefault();
+}
+
+// Chiudi modale cliccando fuori
+window.addEventListener('click', function(e) { 
+    const modal = document.getElementById('bookingModal');
+    if (e.target === modal) {
+        closeBookingModal();
+    }
+});
+
+// Chiudi modale con tasto ESC
+document.addEventListener('keydown', function(e) { 
+    if (e.key === 'Escape') {
+        closeBookingModal();
+    }
+});
+
+// Previeni la chiusura accidentale del modale su mobile
+document.addEventListener('touchstart', function(e) {
+    const modal = document.getElementById('bookingModal');
+    if (modal && modal.classList.contains('show')) {
+        const modalContent = modal.querySelector('.modal-content');
+        if (modalContent && !modalContent.contains(e.target)) {
+            // Se il tocco è fuori dal contenuto, chiudi
+            closeBookingModal();
+        }
+    }
+});
+
+// ============================================
+// FUNZIONI UTILITY PER RESPONSIVE
+// ============================================
+
+// Rileva se è un dispositivo mobile
+function isMobile() {
+    return window.innerWidth <= 768;
+}
+
+// Regola l'altezza della hero section su mobile
+function adjustHeroHeight() {
+    if (isMobile()) {
+        const heroSection = document.querySelector('.hero-section');
+        if (heroSection) {
+            const vh = window.innerHeight;
+            heroSection.style.minHeight = `${vh}px`;
+        }
+    }
+}
+
+// Chiama adjustHeroHeight al resize e al load
+window.addEventListener('resize', function() {
+    adjustHeroHeight();
+    // Rianima il countdown se necessario
+    updateSmartCountdown();
+});
+
+window.addEventListener('load', function() {
+    adjustHeroHeight();
+});
+
+// Gestione swipe per chiudere modale su mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    const modal = document.getElementById('bookingModal');
+    if (modal && modal.classList.contains('show')) {
+        const swipeDistance = touchEndX - touchStartX;
+        // Swipe verso destra per chiudere
+        if (swipeDistance > 100) {
+            closeBookingModal();
+        }
+    }
+});
