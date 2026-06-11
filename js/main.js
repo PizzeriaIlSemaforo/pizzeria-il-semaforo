@@ -446,23 +446,14 @@ function loadPage(pageId) {
 // ============================================
 
 function getScrollOffset() {
-    const festaBar = document.querySelector('.festa-top-bar');
     const navbar = document.querySelector('.navbar');
     let offset = 0;
-    if (festaBar) offset += festaBar.offsetHeight;
     if (navbar) offset += navbar.offsetHeight;
     return offset + 20;
 }
 
-function updateFixedBarHeights() {
-    const festaBar = document.querySelector('.festa-top-bar');
+function updateNavbarHeight() {
     const navbar = document.querySelector('.navbar');
-    
-    if (festaBar) {
-        const festaHeight = festaBar.offsetHeight;
-        document.documentElement.style.setProperty('--festa-bar-height', festaHeight + 'px');
-    }
-    
     if (navbar) {
         const navbarHeight = navbar.offsetHeight;
         document.documentElement.style.setProperty('--navbar-height', navbarHeight + 'px');
@@ -511,8 +502,8 @@ document.addEventListener('DOMContentLoaded', function() {
     updateSmartCountdown();
     setInterval(updateSmartCountdown, 1000);
     
-    // Aggiorna le altezze delle barre fisse
-    updateFixedBarHeights();
+    // Aggiorna l'altezza della navbar
+    updateNavbarHeight();
     
     // Aggiungi gestione touch per dispositivi mobili
     const infoCards = document.querySelectorAll('.info-card');
@@ -547,14 +538,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Aggiorna le altezze al resize
+// Aggiorna l'altezza al resize
 window.addEventListener('resize', function() {
-    updateFixedBarHeights();
+    updateNavbarHeight();
     updateSmartCountdown();
 });
 
 window.addEventListener('load', function() {
-    updateFixedBarHeights();
+    updateNavbarHeight();
 });
 
 // ============================================
@@ -627,9 +618,10 @@ function adjustHeroHeight() {
     if (isMobile()) {
         const heroSection = document.querySelector('.hero-section');
         if (heroSection) {
+            const navbar = document.querySelector('.navbar');
+            const navbarHeight = navbar ? navbar.offsetHeight : 65;
             const vh = window.innerHeight;
-            const offset = getScrollOffset();
-            heroSection.style.minHeight = `${vh - offset}px`;
+            heroSection.style.minHeight = `${vh - navbarHeight}px`;
         }
     }
 }
