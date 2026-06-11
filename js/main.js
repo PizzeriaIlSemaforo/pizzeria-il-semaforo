@@ -407,11 +407,27 @@ function loadPage(pageId) {
     }
     else if (pageId === 'reviews') {
         ricostruisciHome();
-        setTimeout(() => { const section = document.getElementById('reviews'); if(section) section.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+        setTimeout(() => { 
+            const section = document.getElementById('reviews'); 
+            if(section) {
+                const offset = getScrollOffset();
+                const elementPosition = section.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            }
+        }, 100);
     }
     else if (pageId === 'contact') {
         ricostruisciHome();
-        setTimeout(() => { const section = document.getElementById('contact'); if(section) section.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+        setTimeout(() => { 
+            const section = document.getElementById('contact'); 
+            if(section) {
+                const offset = getScrollOffset();
+                const elementPosition = section.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            }
+        }, 100);
     }
     else if (specialPages[pageId]) {
         mainContent.innerHTML = specialPages[pageId];
@@ -422,6 +438,34 @@ function loadPage(pageId) {
     const navbarCollapse = document.querySelector('.navbar-collapse');
     if (navbarCollapse && navbarCollapse.classList.contains('show')) {
         navbarCollapse.classList.remove('show');
+    }
+}
+
+// ============================================
+// GESTIONE OFFSET PER LO SCROLL
+// ============================================
+
+function getScrollOffset() {
+    const festaBar = document.querySelector('.festa-top-bar');
+    const navbar = document.querySelector('.navbar');
+    let offset = 0;
+    if (festaBar) offset += festaBar.offsetHeight;
+    if (navbar) offset += navbar.offsetHeight;
+    return offset + 20;
+}
+
+function updateFixedBarHeights() {
+    const festaBar = document.querySelector('.festa-top-bar');
+    const navbar = document.querySelector('.navbar');
+    
+    if (festaBar) {
+        const festaHeight = festaBar.offsetHeight;
+        document.documentElement.style.setProperty('--festa-bar-height', festaHeight + 'px');
+    }
+    
+    if (navbar) {
+        const navbarHeight = navbar.offsetHeight;
+        document.documentElement.style.setProperty('--navbar-height', navbarHeight + 'px');
     }
 }
 
@@ -467,6 +511,9 @@ document.addEventListener('DOMContentLoaded', function() {
     updateSmartCountdown();
     setInterval(updateSmartCountdown, 1000);
     
+    // Aggiorna le altezze delle barre fisse
+    updateFixedBarHeights();
+    
     // Aggiungi gestione touch per dispositivi mobili
     const infoCards = document.querySelectorAll('.info-card');
     infoCards.forEach(card => {
@@ -477,6 +524,37 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = '';
         });
     });
+    
+    // Gestione anchor link per scroll corretto
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                const offset = getScrollOffset();
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
+
+// Aggiorna le altezze al resize
+window.addEventListener('resize', function() {
+    updateFixedBarHeights();
+    updateSmartCountdown();
+});
+
+window.addEventListener('load', function() {
+    updateFixedBarHeights();
 });
 
 // ============================================
@@ -530,7 +608,6 @@ document.addEventListener('touchstart', function(e) {
     if (modal && modal.classList.contains('show')) {
         const modalContent = modal.querySelector('.modal-content');
         if (modalContent && !modalContent.contains(e.target)) {
-            // Se il tocco è fuori dal contenuto, chiudi
             closeBookingModal();
         }
     }
@@ -551,16 +628,15 @@ function adjustHeroHeight() {
         const heroSection = document.querySelector('.hero-section');
         if (heroSection) {
             const vh = window.innerHeight;
-            heroSection.style.minHeight = `${vh}px`;
+            const offset = getScrollOffset();
+            heroSection.style.minHeight = `${vh - offset}px`;
         }
     }
 }
 
-// Chiama adjustHeroHeight al resize e al load
+// Chiama adjustHeroHeight al resize
 window.addEventListener('resize', function() {
     adjustHeroHeight();
-    // Rianima il countdown se necessario
-    updateSmartCountdown();
 });
 
 window.addEventListener('load', function() {
@@ -580,7 +656,6 @@ document.addEventListener('touchend', function(e) {
     const modal = document.getElementById('bookingModal');
     if (modal && modal.classList.contains('show')) {
         const swipeDistance = touchEndX - touchStartX;
-        // Swipe verso destra per chiudere
         if (swipeDistance > 100) {
             closeBookingModal();
         }
