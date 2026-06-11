@@ -1,4 +1,5 @@
 /* CSS Professionale per Pizzeria Il Semaforo - Festa dell'Unità */
+/* FULLY RESPONSIVE - Si adatta a tutte le dimensioni */
 
 :root {
   --primary: #c62828;
@@ -191,11 +192,6 @@ h1, h2, h3, h4, h5 {
   width: 100%;
   height: 70px;
   fill: #ffffff;
-}
-@media (max-width: 768px) {
-  .hero-wave svg {
-    height: 40px;
-  }
 }
 
 /* ABOUT SECTION */
@@ -740,23 +736,233 @@ h1, h2, h3, h4, h5 {
   font-weight: 500;
 }
 
-/* RESPONSIVE */
+/* ============================================ */
+/* MEDIA QUERIES - COMPLETAMENTE RESPONSIVE */
+/* ============================================ */
+
+/* TABLET (992px e inferiore) */
 @media (max-width: 992px) {
   .hero-title { font-size: 3rem; }
   .section-title { font-size: 2rem; }
   .about-content { padding-left: 0; margin-top: 40px; }
   .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+  .hero-wave svg { height: 50px; }
 }
+
+/* MOBILE LARGE (768px e inferiore) */
 @media (max-width: 768px) {
   body { padding-top: 70px; }
   .navbar { top: 70px; }
+  
+  /* Hero */
+  .hero-title { font-size: 2rem; }
+  .hero-subtitle { font-size: 1.1rem; }
+  .hero-features { 
+    flex-direction: column; 
+    gap: 10px;
+  }
+  .hero-features span { 
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  .hero-buttons .btn { 
+    display: block; 
+    width: 100%; 
+    margin: 10px 0 !important; 
+    text-align: center;
+  }
+  .hero-wave svg { height: 35px; }
+  .hero-content { text-align: center; }
+  
+  /* About */
+  .about-stats { 
+    flex-direction: column; 
+    gap: 20px; 
+  }
+  .about-years { 
+    bottom: 15px; 
+    left: 15px; 
+    padding: 12px;
+  }
+  .years-number { font-size: 1.8rem; }
+  
+  /* Sezioni */
+  .about-section, .menu-section, .gallery-section, 
+  .testimonials-section, .contact-section {
+    padding: 60px 0;
+  }
+  
+  /* Info cards */
+  .info-card { 
+    margin-bottom: 20px; 
+    padding: 25px 15px;
+  }
+  .info-card h3 { font-size: 1.1rem; }
+  .info-highlight { font-size: 1.4rem; }
+  .info-icon { width: 60px; height: 60px; font-size: 1.5rem; }
+  
+  /* Gallery */
+  .gallery-grid { 
+    grid-template-columns: 1fr; 
+    gap: 15px;
+  }
+  .gallery-item { height: 220px; }
+  
+  /* Testimonial */
+  .testimonial-card { padding: 20px; }
+  .testimonial-text { font-size: 0.9rem; }
+  
+  /* Contact */
+  .contact-info-card { padding: 25px; }
+  .contact-list li { gap: 12px; }
+  .contact-list li i { width: 35px; height: 35px; font-size: 1rem; }
+  
+  /* Map */
+  .map-container { 
+    min-height: 300px; 
+    margin-top: 25px;
+  }
+  
+  /* Footer */
+  .footer { padding: 50px 0 20px; }
+  .footer-logo { font-size: 1.4rem; }
+  .footer-title { 
+    font-size: 1.1rem; 
+    margin-top: 25px;
+  }
+  .footer-title:first-of-type { margin-top: 0; }
+  
+  /* Modale */
+  .modal-content { 
+    width: 95%; 
+    max-height: 85vh;
+  }
+  .google-form-frame { height: 450px; }
+  
+  /* Barra festa */
+  .festa-top-bar .container { font-size: 10px; }
+  .festa-top-bar .container > div { 
+    flex-direction: column; 
+    gap: 5px;
+  }
+  
+  /* Countdown */
+  #fullCountdown { 
+    font-size: 0.7rem; 
+    white-space: normal;
+    text-align: center;
+  }
+  
+  /* Titoli sezione */
+  .section-title { font-size: 1.8rem; }
+  .section-subtitle { font-size: 0.85rem; }
+  
+  /* Bottoni */
+  button, .btn, [onclick] {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* WhatsApp float */
+  .whatsapp-float {
+    width: 50px;
+    height: 50px;
+    font-size: 1.6rem;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+/* MOBILE SMALL (576px e inferiore) */
+@media (max-width: 576px) {
+  /* Hero */
+  .hero-title { font-size: 1.8rem; }
+  .hero-subtitle { font-size: 1rem; }
+  
+  /* Padding sezioni */
+  .about-section, .menu-section, .gallery-section, 
+  .testimonials-section, .contact-section {
+    padding: 40px 0;
+  }
+  
+  /* Card */
+  .info-card { padding: 20px 12px; }
+  .info-card h3 { font-size: 1rem; }
+  .info-highlight { font-size: 1.2rem; }
+  
+  /* Gallery */
+  .gallery-item { height: 200px; }
+  
+  /* Testimonial */
+  .testimonial-card { padding: 15px; }
+  .testimonial-author { gap: 10px; }
+  .author-avatar { width: 40px; height: 40px; font-size: 1rem; }
+  .testimonial-author h5 { font-size: 0.95rem; }
+  
+  /* Menu Festa */
+  .festa-title { font-size: 1.6rem; }
+  .festa-category-title h3 { font-size: 0.9rem; }
+  .festa-card { padding: 10px; }
+  .festa-card-header h4 { font-size: 0.85rem; }
+  .festa-price { font-size: 0.85rem; }
+  
+  /* Contact */
+  .contact-info-card { padding: 20px; }
+  
+  /* Footer */
+  .footer-bottom { font-size: 0.75rem; }
+  
+  /* Modale */
+  .modal-header h3 { font-size: 1rem; }
+  .google-form-frame { height: 400px; }
+  
+  /* Barra festa */
+  .festa-top-bar .container { font-size: 9px; }
+}
+
+/* TABLET ORIZZONTALE (tra 768px e 992px) */
+@media (min-width: 769px) and (max-width: 992px) {
   .hero-title { font-size: 2.5rem; }
-  .hero-features { flex-direction: column; }
-  .hero-buttons .btn { display: block; width: 100%; margin: 10px 0 !important; }
-  .about-stats { flex-direction: column; gap: 20px; }
-  .info-card { margin-bottom: 20px; }
-  .gallery-grid { grid-template-columns: 1fr; }
-  .modal-content { max-height: 80vh; }
-  .google-form-frame { height: 500px; }
-  .festa-top-bar .container { font-size: 11px; }
+  .section-title { font-size: 2rem; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .info-card { padding: 30px 15px; }
+  .info-card h3 { font-size: 1.2rem; }
+}
+
+/* DESKTOP LARGE (1200px e superiore) */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+  .hero-title { font-size: 5rem; }
+  .section-title { font-size: 2.8rem; }
+}
+
+/* DESKTOP EXTRA LARGE (1400px e superiore) */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+  .hero-title { font-size: 5.5rem; }
+  .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* UTILITY - Immagini responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Miglioramento touch per dispositivi touch */
+@media (hover: none) and (pointer: coarse) {
+  .btn-primary:active, 
+  .nav-link:active,
+  .info-card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+  
+  .whatsapp-float:active {
+    transform: scale(0.95);
+  }
 }
