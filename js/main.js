@@ -135,6 +135,7 @@ const menuFestaPage = `
   <section style="padding-top: 60px; background: linear-gradient(135deg, #fffaf5, #fef5e8);">
     <div class="container">
       <div class="festa-header">
+        <div style="height: 28px;"></div>
         <h2 class="festa-title">Festa dell'<span>Unità</span></h2>
         <p class="festa-subtitle">Piatti tradizionali toscani preparati con passione per celebrare insieme questa festa speciale</p>
         <div class="festa-divider"></div>
