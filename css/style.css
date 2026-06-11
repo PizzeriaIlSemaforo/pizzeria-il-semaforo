@@ -14,6 +14,9 @@
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   --shadow-hover: 0 20px 40px rgba(198, 40, 40, 0.15);
   --transition: all 0.3s ease;
+  /* VARIABILI PER L'ALTEZZA DELLE BARRE FISSE */
+  --festa-bar-height: 46px;
+  --navbar-height: 76px;
 }
 
 * {
@@ -25,6 +28,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  scroll-padding-top: calc(var(--festa-bar-height) + var(--navbar-height) + 20px);
 }
 
 body {
@@ -33,7 +37,7 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   background-color: var(--white);
-  padding-top: 46px;
+  padding-top: calc(var(--festa-bar-height) + var(--navbar-height));
 }
 
 h1, h2, h3, h4, h5 {
@@ -68,6 +72,7 @@ h1, h2, h3, h4, h5 {
   background: linear-gradient(90deg, #cc0000 0%, #cc0000 33%, #ffffff 33%, #ffffff 66%, #009900 66%, #009900 100%);
   padding: 8px 0;
   box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  height: var(--festa-bar-height);
 }
 .festa-top-bar .container {
   text-align: center;
@@ -75,6 +80,19 @@ h1, h2, h3, h4, h5 {
   font-weight: 700;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
   font-size: 14px;
+}
+.festa-top-bar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.festa-top-bar-text {
+  font-size: inherit;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.3;
 }
 
 /* NAVBAR */
@@ -84,7 +102,11 @@ h1, h2, h3, h4, h5 {
   padding: 15px 0;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
   transition: var(--transition);
-  top: 46px;
+  position: fixed;
+  top: var(--festa-bar-height);
+  left: 0;
+  width: 100%;
+  z-index: 1001;
 }
 .navbar.scrolled {
   padding: 10px 0;
@@ -137,11 +159,12 @@ h1, h2, h3, h4, h5 {
 /* HERO SECTION */
 .hero-section {
   position: relative;
-  min-height: 100vh;
+  min-height: calc(100vh - var(--festa-bar-height) - var(--navbar-height));
   background: url('../images/pizzeria.jpg') center/cover no-repeat fixed;
   display: flex;
   align-items: center;
   overflow: hidden;
+  margin-top: 0;
 }
 .hero-overlay {
   position: absolute;
@@ -155,6 +178,7 @@ h1, h2, h3, h4, h5 {
 .hero-content {
   position: relative;
   z-index: 2;
+  padding: 20px 0;
 }
 .hero-title {
   font-size: 4.5rem;
@@ -179,6 +203,17 @@ h1, h2, h3, h4, h5 {
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   font-weight: 500;
+}
+.hero-badge {
+  background: rgba(0,0,0,0.5);
+  padding: 15px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+.hero-badge h3 {
+  margin: 0;
+  font-size: 1.3rem;
 }
 .hero-wave {
   position: absolute;
@@ -283,6 +318,14 @@ h1, h2, h3, h4, h5 {
 .info-card:hover {
   transform: translateY(-10px);
   box-shadow: var(--shadow-hover);
+}
+.festa-info-card {
+  background: linear-gradient(135deg, #cc000010, #00990010);
+  border: 2px dashed var(--primary);
+}
+.festa-info-icon {
+  font-size: 2rem;
+  color: var(--primary);
 }
 .info-icon {
   width: 80px;
@@ -742,6 +785,9 @@ h1, h2, h3, h4, h5 {
 
 /* TABLET (992px e inferiore) */
 @media (max-width: 992px) {
+  :root {
+    --navbar-height: 70px;
+  }
   .hero-title { font-size: 3rem; }
   .section-title { font-size: 2rem; }
   .about-content { padding-left: 0; margin-top: 40px; }
@@ -751,8 +797,18 @@ h1, h2, h3, h4, h5 {
 
 /* MOBILE LARGE (768px e inferiore) */
 @media (max-width: 768px) {
-  body { padding-top: 70px; }
-  .navbar { top: 70px; }
+  :root {
+    --festa-bar-height: 42px;
+    --navbar-height: 65px;
+  }
+  
+  body { 
+    padding-top: calc(var(--festa-bar-height) + var(--navbar-height));
+  }
+  
+  html {
+    scroll-padding-top: calc(var(--festa-bar-height) + var(--navbar-height) + 15px);
+  }
   
   /* Hero */
   .hero-title { font-size: 2rem; }
@@ -773,6 +829,8 @@ h1, h2, h3, h4, h5 {
   }
   .hero-wave svg { height: 35px; }
   .hero-content { text-align: center; }
+  .hero-badge h3 { font-size: 1rem; }
+  .hero-badge { padding: 10px; width: 100%; text-align: center; }
   
   /* About */
   .about-stats { 
@@ -841,7 +899,7 @@ h1, h2, h3, h4, h5 {
   
   /* Barra festa */
   .festa-top-bar .container { font-size: 10px; }
-  .festa-top-bar .container > div { 
+  .festa-top-bar-content { 
     flex-direction: column; 
     gap: 5px;
   }
@@ -875,6 +933,11 @@ h1, h2, h3, h4, h5 {
 
 /* MOBILE SMALL (576px e inferiore) */
 @media (max-width: 576px) {
+  :root {
+    --festa-bar-height: 38px;
+    --navbar-height: 60px;
+  }
+  
   /* Hero */
   .hero-title { font-size: 1.8rem; }
   .hero-subtitle { font-size: 1rem; }
@@ -898,13 +961,6 @@ h1, h2, h3, h4, h5 {
   .testimonial-author { gap: 10px; }
   .author-avatar { width: 40px; height: 40px; font-size: 1rem; }
   .testimonial-author h5 { font-size: 0.95rem; }
-  
-  /* Menu Festa */
-  .festa-title { font-size: 1.6rem; }
-  .festa-category-title h3 { font-size: 0.9rem; }
-  .festa-card { padding: 10px; }
-  .festa-card-header h4 { font-size: 0.85rem; }
-  .festa-price { font-size: 0.85rem; }
   
   /* Contact */
   .contact-info-card { padding: 20px; }
@@ -965,4 +1021,9 @@ img {
   .whatsapp-float:active {
     transform: scale(0.95);
   }
+}
+
+/* ANCHOR OFFSET PER LINK INTERNI - CORREGGE LA SOVRAPPOSIZIONE */
+*[id] {
+  scroll-margin-top: calc(var(--festa-bar-height, 46px) + var(--navbar-height, 76px) + 20px);
 }
