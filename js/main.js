@@ -74,8 +74,6 @@ const menuNormalePage = `
 const menuFestaPage = `
   <style>
     .festa-header { text-align: center; margin-bottom: 50px; }
-    .festa-badge { display: inline-block; background: linear-gradient(135deg, #cc0000, #009900); padding: 8px 30px; border-radius: 50px; margin-bottom: 20px; border: none; outline: none; }
-    .festa-badge span { color: white; font-weight: 700; letter-spacing: 3px; font-size: 0.85rem; }
     .festa-title { font-size: 3rem; font-weight: 800; font-family: 'Playfair Display', serif; margin-bottom: 15px; }
     .festa-title span { color: #cc0000; }
     .festa-subtitle { max-width: 650px; margin: 0 auto 20px; color: #666; font-size: 1rem; }
