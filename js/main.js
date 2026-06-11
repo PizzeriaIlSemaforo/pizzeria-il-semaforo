@@ -132,7 +132,7 @@ const menuFestaPage = `
       .festa-card-header h4 { font-size: 0.9rem; }
     }
   </style>
-  <section style="padding: 60px 0; background: linear-gradient(135deg, #fffaf5, #fef5e8);">
+  <section style="padding-top: 60px; background: linear-gradient(135deg, #fffaf5, #fef5e8);">
     <div class="container">
       <div class="festa-header">
         <h2 class="festa-title">Festa dell'<span>Unità</span></h2>
@@ -224,6 +224,7 @@ const menuFestaPage = `
     </div>
   </section>
 `;
+
 // ============================================
 // PAGINE SPECIALI
 // ============================================
