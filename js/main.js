@@ -1,5 +1,4 @@
 // JavaScript per Pizzeria Il Semaforo - Festa dell'Unità
-// FULLY RESPONSIVE - Si adatta a tutte le dimensioni
 
 // ============================================
 // PAGINA MENÙ NORMALE (SOSPESO)
@@ -40,11 +39,6 @@ const menuNormalePage = `
       50% { transform: scale(1.02); }
       100% { transform: scale(1); }
     }
-    @media (max-width: 768px) {
-      .sospeso-badge { padding: 15px 25px; font-size: 1rem; }
-      .sospeso-badge i { font-size: 1.4rem; }
-      .sospeso-badge small { font-size: 0.7rem; }
-    }
   </style>
   <section class="menu-section" style="padding-top: 60px;">
     <div class="container">
@@ -74,7 +68,7 @@ const menuNormalePage = `
 `;
 
 // ============================================
-// PAGINA MENÙ FESTA DELL'UNITÀ (RESPONSIVE)
+// PAGINA MENÙ FESTA DELL'UNITÀ (CARD STESSA ALTEZZA)
 // ============================================
 
 const menuFestaPage = `
@@ -91,7 +85,7 @@ const menuFestaPage = `
     .festa-category-title i { color: #cc0000; font-size: 1.5rem; }
     .festa-category-title h3 { color: white; margin: 0; font-size: 1.3rem; font-weight: 600; }
     
-    /* CARD STESSA ALTEZZA - FLEXBOX RESPONSIVE */
+    /* CARD STESSA ALTEZZA - FLEXBOX PERFETTO */
     .festa-row {
       display: flex;
       flex-wrap: wrap;
@@ -132,34 +126,13 @@ const menuFestaPage = `
       display: flex;
     }
     
-    /* RESPONSIVE MENU FESTA */
-    @media (max-width: 992px) {
-      .festa-title { font-size: 2.5rem; }
-      .festa-category-title h3 { font-size: 1.1rem; }
-    }
-    
     @media (max-width: 768px) {
-      .festa-title { font-size: 1.8rem; }
-      .festa-category-title { padding: 8px 15px; }
-      .festa-category-title h3 { font-size: 0.95rem; }
-      .festa-category-title i { font-size: 1.2rem; }
+      .festa-title { font-size: 2rem; }
+      .festa-category-title h3 { font-size: 1rem; }
       .festa-col { flex: 0 0 100%; max-width: 100%; }
       .festa-col-3 { flex: 0 0 100%; max-width: 100%; }
-      .festa-card { padding: 12px; min-height: auto; }
+      .festa-card { padding: 10px 15px; min-height: auto; }
       .festa-card-header h4 { font-size: 0.9rem; }
-      .festa-price { font-size: 0.9rem; }
-      .festa-desc { font-size: 0.7rem; }
-      .festa-badge-small { font-size: 0.55rem; }
-      .festa-subtitle { font-size: 0.85rem; padding: 0 15px; }
-      .festa-header { padding: 0 10px; }
-      .festa-badge span { font-size: 0.7rem; }
-    }
-    
-    @media (max-width: 480px) {
-      .festa-title { font-size: 1.5rem; }
-      .festa-category-title h3 { font-size: 0.85rem; }
-      .festa-card-header h4 { font-size: 0.8rem; }
-      .festa-price { font-size: 0.8rem; }
     }
   </style>
   <section style="padding: 60px 0; background: linear-gradient(135deg, #fffaf5, #fef5e8);">
@@ -206,7 +179,7 @@ const menuFestaPage = `
         </div>
       </div>
 
-      <!-- CONTORNI (3 per riga responsive) -->
+      <!-- CONTORNI (3 per riga) -->
       <div class="festa-category">
         <div class="festa-category-title"><i class="fas fa-leaf"></i><h3>Contorni</h3></div>
         <div class="festa-row">
@@ -407,57 +380,19 @@ function loadPage(pageId) {
     }
     else if (pageId === 'reviews') {
         ricostruisciHome();
-        setTimeout(() => { 
-            const section = document.getElementById('reviews'); 
-            if(section) {
-                const offset = getScrollOffset();
-                const elementPosition = section.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - offset;
-                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-            }
-        }, 100);
+        setTimeout(() => { const section = document.getElementById('reviews'); if(section) section.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
     }
     else if (pageId === 'contact') {
         ricostruisciHome();
-        setTimeout(() => { 
-            const section = document.getElementById('contact'); 
-            if(section) {
-                const offset = getScrollOffset();
-                const elementPosition = section.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - offset;
-                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-            }
-        }, 100);
+        setTimeout(() => { const section = document.getElementById('contact'); if(section) section.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
     }
     else if (specialPages[pageId]) {
         mainContent.innerHTML = specialPages[pageId];
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
-    // Chiudi il menu mobile dopo il click
     const navbarCollapse = document.querySelector('.navbar-collapse');
-    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-        navbarCollapse.classList.remove('show');
-    }
-}
-
-// ============================================
-// GESTIONE OFFSET PER LO SCROLL
-// ============================================
-
-function getScrollOffset() {
-    const navbar = document.querySelector('.navbar');
-    let offset = 0;
-    if (navbar) offset += navbar.offsetHeight;
-    return offset + 20;
-}
-
-function updateNavbarHeight() {
-    const navbar = document.querySelector('.navbar');
-    if (navbar) {
-        const navbarHeight = navbar.offsetHeight;
-        document.documentElement.style.setProperty('--navbar-height', navbarHeight + 'px');
-    }
+    if (navbarCollapse) navbarCollapse.classList.remove('show');
 }
 
 // ============================================
@@ -475,10 +410,7 @@ document.addEventListener('DOMContentLoaded', function() {
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            const page = this.getAttribute('data-page');
-            if (page) {
-                loadPage(page);
-            }
+            loadPage(this.getAttribute('data-page'));
         });
     });
     
@@ -492,164 +424,25 @@ document.addEventListener('DOMContentLoaded', function() {
     
     window.addEventListener('scroll', function() {
         const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
+        if (window.scrollY > 50) navbar.classList.add('scrolled');
+        else navbar.classList.remove('scrolled');
     });
     
     updateSmartCountdown();
     setInterval(updateSmartCountdown, 1000);
-    
-    // Aggiorna l'altezza della navbar
-    updateNavbarHeight();
-    
-    // Aggiungi gestione touch per dispositivi mobili
-    const infoCards = document.querySelectorAll('.info-card');
-    infoCards.forEach(card => {
-        card.addEventListener('touchstart', function() {
-            this.style.transform = 'scale(0.98)';
-        });
-        card.addEventListener('touchend', function() {
-            this.style.transform = '';
-        });
-    });
-    
-    // Gestione anchor link per scroll corretto
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                e.preventDefault();
-                const offset = getScrollOffset();
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - offset;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-});
-
-// Aggiorna l'altezza al resize
-window.addEventListener('resize', function() {
-    updateNavbarHeight();
-    updateSmartCountdown();
-});
-
-window.addEventListener('load', function() {
-    updateNavbarHeight();
 });
 
 // ============================================
-// MODALE PRENOTAZIONE
+// MODALE
 // ============================================
 
 function openBookingModal() {
     const modal = document.getElementById('bookingModal');
-    if (modal) { 
-        modal.classList.add('show'); 
-        document.body.style.overflow = 'hidden';
-        
-        // Previeni lo scroll sul body
-        document.body.addEventListener('touchmove', preventScroll, { passive: false });
-    }
+    if (modal) { modal.classList.add('show'); document.body.style.overflow = 'hidden'; }
 }
-
 function closeBookingModal() {
     const modal = document.getElementById('bookingModal');
-    if (modal) { 
-        modal.classList.remove('show'); 
-        document.body.style.overflow = 'auto';
-        
-        // Riabilita lo scroll
-        document.body.removeEventListener('touchmove', preventScroll);
-    }
+    if (modal) { modal.classList.remove('show'); document.body.style.overflow = 'auto'; }
 }
-
-function preventScroll(e) {
-    e.preventDefault();
-}
-
-// Chiudi modale cliccando fuori
-window.addEventListener('click', function(e) { 
-    const modal = document.getElementById('bookingModal');
-    if (e.target === modal) {
-        closeBookingModal();
-    }
-});
-
-// Chiudi modale con tasto ESC
-document.addEventListener('keydown', function(e) { 
-    if (e.key === 'Escape') {
-        closeBookingModal();
-    }
-});
-
-// Previeni la chiusura accidentale del modale su mobile
-document.addEventListener('touchstart', function(e) {
-    const modal = document.getElementById('bookingModal');
-    if (modal && modal.classList.contains('show')) {
-        const modalContent = modal.querySelector('.modal-content');
-        if (modalContent && !modalContent.contains(e.target)) {
-            closeBookingModal();
-        }
-    }
-});
-
-// ============================================
-// FUNZIONI UTILITY PER RESPONSIVE
-// ============================================
-
-// Rileva se è un dispositivo mobile
-function isMobile() {
-    return window.innerWidth <= 768;
-}
-
-// Regola l'altezza della hero section su mobile
-function adjustHeroHeight() {
-    if (isMobile()) {
-        const heroSection = document.querySelector('.hero-section');
-        if (heroSection) {
-            const navbar = document.querySelector('.navbar');
-            const navbarHeight = navbar ? navbar.offsetHeight : 65;
-            const vh = window.innerHeight;
-            heroSection.style.minHeight = `${vh - navbarHeight}px`;
-        }
-    }
-}
-
-// Chiama adjustHeroHeight al resize
-window.addEventListener('resize', function() {
-    adjustHeroHeight();
-});
-
-window.addEventListener('load', function() {
-    adjustHeroHeight();
-});
-
-// Gestione swipe per chiudere modale su mobile
-let touchStartX = 0;
-let touchEndX = 0;
-
-document.addEventListener('touchstart', function(e) {
-    touchStartX = e.changedTouches[0].screenX;
-});
-
-document.addEventListener('touchend', function(e) {
-    touchEndX = e.changedTouches[0].screenX;
-    const modal = document.getElementById('bookingModal');
-    if (modal && modal.classList.contains('show')) {
-        const swipeDistance = touchEndX - touchStartX;
-        if (swipeDistance > 100) {
-            closeBookingModal();
-        }
-    }
-});
+window.addEventListener('click', function(e) { if (e.target === document.getElementById('bookingModal')) closeBookingModal(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeBookingModal(); });
