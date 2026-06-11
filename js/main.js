@@ -74,7 +74,7 @@ const menuNormalePage = `
 const menuFestaPage = `
   <style>
     .festa-header { text-align: center; margin-bottom: 50px; }
-    .festa-badge { display: inline-block; background: linear-gradient(135deg, #cc0000, #009900); padding: 8px 30px; border-radius: 50px; margin-bottom: 20px; }
+    .festa-badge { display: inline-block; background: linear-gradient(135deg, #cc0000, #009900); padding: 8px 30px; border-radius: 50px; margin-bottom: 20px; border: none; outline: none; }
     .festa-badge span { color: white; font-weight: 700; letter-spacing: 3px; font-size: 0.85rem; }
     .festa-title { font-size: 3rem; font-weight: 800; font-family: 'Playfair Display', serif; margin-bottom: 15px; }
     .festa-title span { color: #cc0000; }
@@ -103,7 +103,6 @@ const menuFestaPage = `
       padding: 14px 18px;
       margin-bottom: 15px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-      border-left: 4px solid #cc0000;
       transition: all 0.2s ease;
       width: 100%;
       display: flex;
@@ -116,7 +115,7 @@ const menuFestaPage = `
     .festa-price { font-size: 1rem; font-weight: 800; color: #cc0000; white-space: nowrap; margin-left: 10px; }
     .festa-desc { color: #777; font-size: 0.75rem; margin: 4px 0 0 0; line-height: 1.3; }
     .festa-badge-small { display: inline-block; background: linear-gradient(135deg, #cc0000, #009900); color: white; font-size: 0.6rem; padding: 2px 8px; border-radius: 20px; margin-top: 6px; align-self: flex-start; }
-    .festa-card-special { background: linear-gradient(135deg, #fff8f0, #fff0e0); border-left-color: #ff8c00; }
+    .festa-card-special { background: linear-gradient(135deg, #fff8f0, #fff0e0); }
     
     /* COLONNE A 3 PER CONTORNI */
     .festa-col-3 {
@@ -227,7 +226,6 @@ const menuFestaPage = `
     </div>
   </section>
 `;
-
 // ============================================
 // PAGINE SPECIALI
 // ============================================
