@@ -25,7 +25,7 @@ const menuNormalePage = `
           <div class="menu-category-card">
             <h3><i class="fas fa-pizza-slice me-2 text-primary"></i>Giro Pizza</h3>
             <div class="menu-item">
-              <h4>🍕 GIRO PIZZA NO STOP 🍕</h4>
+              <h4>🍕GIRO PIZZA NO STOP</h4>
               <p>Un viaggio attraverso i sapori della tradizione</p>
               <span class="badge bg-primary mt-2">A volontà</span>
             </div>
