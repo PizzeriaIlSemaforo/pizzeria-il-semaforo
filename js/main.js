@@ -132,7 +132,7 @@ const specialPages = {
                             <div class="about-stats">
                                 <div class="stat-item"><span class="stat-number">15+</span><span class="stat-label">Piatti Tipici</span></div>
                                 <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Familiare</span></div>
-                                <div class="stat-item"><span class="stat-number">7€</span><span class="stat-label">Prezzo Medio</span></div>
+                                <div class="stat-item"><span class="stat-number">20€</span><span class="stat-label">Offerta Speciale</span></div>
                             </div>
                         </div>
                     </div>
