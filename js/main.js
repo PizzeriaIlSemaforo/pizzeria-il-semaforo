@@ -5,7 +5,7 @@
 // ============================================
 
 const menuNormalePage = `
-  <section class="menu-section" style="padding-top: 60px;">
+  <section class="menu-section" id="menu">
     <div class="container">
       <div class="text-center mb-5">
         <span class="section-subtitle">Il Nostro Menù</span>
