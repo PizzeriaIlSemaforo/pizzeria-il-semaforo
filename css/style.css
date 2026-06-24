@@ -374,6 +374,22 @@ h1, h2, h3, h4, h5 {
   border-radius: 50px;
   font-size: 0.9rem;
 }
+.menu-summer-note {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  border-left: 4px solid #ff9800;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+.menu-summer-note i {
+  color: #ff9800;
+  margin-right: 10px;
+}
+.menu-summer-note small {
+  display: block;
+  margin-top: 5px;
+  color: #666;
+}
 
 /* GALLERY SECTION */
 .gallery-section {
