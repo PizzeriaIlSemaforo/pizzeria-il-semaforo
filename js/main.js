@@ -50,48 +50,33 @@ const menuNormalePage = `
           <div class="menu-category-card">
             <h3><i class="fas fa-pasta me-2 text-primary"></i>Primi del Giorno</h3>
             <div class="menu-item">
-              <p style="color: #666; font-style: italic;">Ogni giorno lo chef propone primi piatti della tradizione toscana preparati con ingredienti freschi di stagione.</p>
+              <p style="color: #666; font-style: italic;">Ogni giorno lo chef propone primi piatti preparati con ingredienti freschi di stagione.</p>
               <p style="color: var(--primary); font-weight: 600;">Chiedi al personale le specialità del giorno!</p>
             </div>
           </div>
           <div class="menu-category-card">
             <h3><i class="fas fa-grill me-2 text-primary"></i>Secondi del Giorno</h3>
             <div class="menu-item">
-              <p style="color: #666; font-style: italic;">Carni alla griglia, spezzatini e piatti unici della cucina toscana.</p>
-              <p style="color: var(--primary); font-weight: 600;">Scopri le proposte del giorno!</p>
+              <p style="color: #666; font-style: italic;">Ogni giorno lo chef propone secondi piatti preparati con ingredienti freschi di stagione.</p>
+              <p style="color: var(--primary); font-weight: 600;">Chiedi al personale le specialità del giorno!</p>
             </div>
           </div>
           <div class="menu-category-card">
             <h3><i class="fas fa-cake me-2 text-primary"></i>Dolci</h3>
             <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Tiramisù Classico</h4>
-                <span class="menu-price">€ 3,00</span>
-              </div>
+              <h4>Tiramisù Classico</h4>
             </div>
             <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Torta della Nonna</h4>
-                <span class="menu-price">€ 3,00</span>
-              </div>
+              <h4>Torta della Nonna</h4>
             </div>
             <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Cheesecake</h4>
-                <span class="menu-price">€ 3,50</span>
-              </div>
+              <h4>Cheesecake</h4>
             </div>
             <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Torta al Cioccolato</h4>
-                <span class="menu-price">€ 3,00</span>
-              </div>
+              <h4>Torta al Cioccolato</h4>
             </div>
             <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Panna Cotta</h4>
-                <span class="menu-price">€ 3,00</span>
-              </div>
+              <h4>Panna Cotta</h4>
             </div>
           </div>
           <div class="menu-summer-note">
