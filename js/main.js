@@ -285,7 +285,7 @@ const specialPages = {
                 <div class="section-header text-center">
                     <span class="section-subtitle">I Nostri Scatti</span>
                     <h2 class="section-title">Galleria</h2>
-                    <p class="section-description">Momenti di convivialità e sapori nel nostro locale</p>
+                    <p class="section-description">Immagini del nostro locale, dei nostri piatti e dei momenti di convivialità</p>
                 </div>
                 <div class="gallery-grid">
                     <div class="gallery-item"><img src="images/1.jpeg" alt="Foto 1" loading="lazy"></div>
