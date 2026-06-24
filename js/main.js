@@ -1,7 +1,7 @@
 // JavaScript per Pizzeria Il Semaforo
 
 // ============================================
-// PAGINA MENÙ NORMALE
+// PAGINA MENÙ
 // ============================================
 
 const menuNormalePage = `
@@ -16,141 +16,49 @@ const menuNormalePage = `
       <div class="row">
         <div class="col-lg-6">
           <div class="menu-category-card">
-            <h3><i class="fas fa-utensils me-2 text-primary"></i>Antipasti</h3>
+            <h3><i class="fas fa-utensils me-2 text-primary"></i>Antipasto</h3>
             <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Antipasto della Casa</h4>
-                <span class="menu-price">€ 8,00</span>
-              </div>
+              <h4>Antipasto della Casa</h4>
               <p>Selezione di salumi toscani, schiacciata calda, verdure sott'olio</p>
             </div>
+          </div>
+          <div class="menu-category-card">
+            <h3><i class="fas fa-pizza-slice me-2 text-primary"></i>Giro Pizza</h3>
             <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Crostini Toscani</h4>
-                <span class="menu-price">€ 5,00</span>
-              </div>
-              <p>Fegatini, salsiccia e stracchini, lardo di Colonnata</p>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Prosciutto e Melone</h4>
-                <span class="menu-price">€ 6,50</span>
-              </div>
+              <h4>🍕 GIRO PIZZA NO STOP 🍕</h4>
+              <p>Un viaggio attraverso i sapori della tradizione</p>
+              <span class="badge bg-primary mt-2">A volontà</span>
             </div>
           </div>
           <div class="menu-category-card">
-            <h3><i class="fas fa-pasta me-2 text-primary"></i>Primi Piatti</h3>
+            <h3><i class="fas fa-wine-bottle me-2 text-primary"></i>Bevuta</h3>
             <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Tagliatelle al Ragù</h4>
-                <span class="menu-price">€ 8,00</span>
-              </div>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Tortelli Ricotta e Spinaci</h4>
-                <span class="menu-price">€ 9,00</span>
-              </div>
-              <p>Burro e salvia</p>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Penne alla Pecora</h4>
-                <span class="menu-price">€ 8,00</span>
-              </div>
+              <h4>Bibite (33cl)</h4>
+              <p>Incluse</p>
             </div>
           </div>
-          <div class="menu-category-card">
-            <h3><i class="fas fa-grill me-2 text-primary"></i>Secondi Piatti</h3>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Grigliata Mista</h4>
-                <span class="menu-price">€ 15,00</span>
-              </div>
-              <p>Pollo, rosticciana, salsiccia</p>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Galletto al Mattone</h4>
-                <span class="menu-price">€ 12,00</span>
-              </div>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Rosticciana</h4>
-                <span class="menu-price">€ 10,00</span>
-              </div>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Pecora in Umido</h4>
-                <span class="menu-price">€ 15,00</span>
-              </div>
+          <div class="menu-category-card" style="background: linear-gradient(135deg, #fff8f0, #fff0e0); border: 2px solid var(--primary);">
+            <h3><i class="fas fa-tag me-2 text-primary"></i>Offerta Speciale</h3>
+            <div class="menu-item text-center">
+              <h4 style="font-size: 1.8rem; color: var(--primary);">Antipasto + Giro Pizza + Bevuta</h4>
+              <p style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">€ 20,00</p>
+              <p style="color: #666;">a persona</p>
             </div>
           </div>
         </div>
         <div class="col-lg-6">
           <div class="menu-category-card">
-            <h3><i class="fas fa-pizza-slice me-2 text-primary"></i>Pizze</h3>
+            <h3><i class="fas fa-pasta me-2 text-primary"></i>Primi del Giorno</h3>
             <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Margherita</h4>
-                <span class="menu-price">€ 5,00</span>
-              </div>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Diavola</h4>
-                <span class="menu-price">€ 6,00</span>
-              </div>
-              <p>Salame piccante</p>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Quattro Stagioni</h4>
-                <span class="menu-price">€ 7,00</span>
-              </div>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Boscaiola</h4>
-                <span class="menu-price">€ 7,00</span>
-              </div>
-              <p>Funghi e salsiccia</p>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Capricciosa</h4>
-                <span class="menu-price">€ 7,50</span>
-              </div>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Giro Pizza No Stop</h4>
-                <span class="menu-price">€ 15,00</span>
-              </div>
-              <p>Pizze a volontà!</p>
+              <p style="color: #666; font-style: italic;">Ogni giorno lo chef propone primi piatti della tradizione toscana preparati con ingredienti freschi di stagione.</p>
+              <p style="color: var(--primary); font-weight: 600;">Chiedi al personale le specialità del giorno!</p>
             </div>
           </div>
           <div class="menu-category-card">
-            <h3><i class="fas fa-leaf me-2 text-primary"></i>Contorni</h3>
+            <h3><i class="fas fa-grill me-2 text-primary"></i>Secondi del Giorno</h3>
             <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Fagioli all'Olio</h4>
-                <span class="menu-price">€ 4,00</span>
-              </div>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Patate Arrosto</h4>
-                <span class="menu-price">€ 4,00</span>
-              </div>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Insalata Mista</h4>
-                <span class="menu-price">€ 4,00</span>
-              </div>
+              <p style="color: #666; font-style: italic;">Carni alla griglia, spezzatini e piatti unici della cucina toscana.</p>
+              <p style="color: var(--primary); font-weight: 600;">Scopri le proposte del giorno!</p>
             </div>
           </div>
           <div class="menu-category-card">
@@ -163,70 +71,33 @@ const menuNormalePage = `
             </div>
             <div class="menu-item">
               <div class="d-flex justify-content-between">
+                <h4>Torta della Nonna</h4>
+                <span class="menu-price">€ 3,00</span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="d-flex justify-content-between">
+                <h4>Cheesecake</h4>
+                <span class="menu-price">€ 3,50</span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="d-flex justify-content-between">
+                <h4>Torta al Cioccolato</h4>
+                <span class="menu-price">€ 3,00</span>
+              </div>
+            </div>
+            <div class="menu-item">
+              <div class="d-flex justify-content-between">
                 <h4>Panna Cotta</h4>
                 <span class="menu-price">€ 3,00</span>
               </div>
             </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Cocomero</h4>
-                <span class="menu-price">€ 2,50</span>
-              </div>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Macedonia di Frutta</h4>
-                <span class="menu-price">€ 3,50</span>
-              </div>
-            </div>
           </div>
-          <div class="menu-category-card">
-            <h3><i class="fas fa-wine-bottle me-2 text-primary"></i>Bevande</h3>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Acqua (1L)</h4>
-                <span class="menu-price">€ 2,00</span>
-              </div>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Acqua (0.5L)</h4>
-                <span class="menu-price">€ 1,30</span>
-              </div>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Bibita in lattina</h4>
-                <span class="menu-price">€ 2,50</span>
-              </div>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Birra alla spina piccola</h4>
-                <span class="menu-price">€ 3,00</span>
-              </div>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Birra alla spina media</h4>
-                <span class="menu-price">€ 5,00</span>
-              </div>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Vino Rosso della Casa (0.75L)</h4>
-                <span class="menu-price">€ 7,00</span>
-              </div>
-            </div>
-            <div class="menu-item">
-              <div class="d-flex justify-content-between">
-                <h4>Vino Bianco Frizzante (brocca 0.5L)</h4>
-                <span class="menu-price">€ 6,00</span>
-              </div>
-            </div>
-          </div>
-          <div class="menu-note text-center mt-3">
-            <p><i class="fas fa-info-circle me-2"></i>Coperto e pane: € 2,00</p>
+          <div class="menu-summer-note">
+            <i class="fas fa-sun"></i>
+            <strong>Nota Estate:</strong> Durante la stagione estiva, i dolci potrebbero subire variazioni. In alternativa saranno disponibili:
+            <small>🍉 Anguria | 🍧 Sorbetto | 🍦 Dolci freschi del giorno</small>
           </div>
         </div>
       </div>
@@ -272,7 +143,7 @@ const specialPages = {
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-lg-3"><div class="info-card"><div class="info-icon"><i class="fas fa-clock"></i></div><h3>Orari</h3><p>Giovedì - Domenica</p><p class="info-highlight">19:00 - 00:00</p><small>Chiuso Lun - Mar - Mer</small></div></div>
-                    <div class="col-md-6 col-lg-3"><div class="info-card"><div class="info-icon"><i class="fas fa-euro-sign"></i></div><h3>Menù</h3><p>Antipasti, Primi, Secondi</p><p class="info-highlight">Da € 3,00</p><small>Piatti della tradizione</small></div></div>
+                    <div class="col-md-6 col-lg-3"><div class="info-card"><div class="info-icon"><i class="fas fa-euro-sign"></i></div><h3>Menù</h3><p>Antipasto, Giro Pizza, Bevuta</p><p class="info-highlight">€ 20,00</p><small>Primi e Secondi del Giorno</small></div></div>
                     <div class="col-md-6 col-lg-3"><div class="info-card"><div class="info-icon"><i class="fas fa-music"></i></div><h3>Musica dal Vivo</h3><p>Weekend</p><p class="info-highlight">Eventi Speciali</p></div></div>
                     <div class="col-md-6 col-lg-3"><div class="info-card"><div class="info-icon"><i class="fas fa-phone-alt"></i></div><h3>Prenotazioni</h3><p>Chiama o WhatsApp</p><p class="info-highlight">340 304 6310</p></div></div>
                 </div>
