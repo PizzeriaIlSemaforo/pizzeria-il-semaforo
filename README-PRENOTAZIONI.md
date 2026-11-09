@@ -6,27 +6,32 @@ index.html, il-locale.html, menu.html, galleria.html, chi-siamo.html,
 recensioni.html, contatti.html, prenotazioni.html, privacy.html, style.css, app.js.
 Le immagini e il logo originali sono riutilizzati dalla cartella /images.
 
-PRENOTAZIONI VIA EMAIL: NECESSARIA ATTIVAZIONE GRATUITA
-Il sito non usa WhatsApp né Google Forms per le prenotazioni. Il modulo usa
-un POST verso una web app Google Apps Script, che gestisce le email automatiche.
+PRENOTAZIONI VIA EMAIL — SERVIZIO GIÀ COLLEGATO
+Il modulo del sito invia le richieste a Google Apps Script e NON utilizza
+Google Forms, Google Sheets o WhatsApp per le prenotazioni.
+L'URL /exec è già inserito in prenotazioni.html.
 
-ATTENZIONE: l'account Google della pizzeria deve autorizzare l'app Script;
-non e' possibile attivarlo soltanto con l'accesso al repository GitHub.
-FINO ALL'ATTIVAZIONE IL SITO NON INVIA ALCUNA PRENOTAZIONE E LO DICHIARA.
+Per aggiornare i controlli e i testi delle email:
+1) Apri https://script.google.com con l'account che gestisce le prenotazioni.
+2) Apri il progetto Apps Script già pubblicato e sostituisci Code.gs
+   con il file setup-prenotazioni/Code.gs presente nel repository.
+3) Salva; vai a Distribuisci > Gestisci distribuzioni > Modifica.
+4) Seleziona Nuova versione e pubblica sulla distribuzione esistente.
+5) Non creare una nuova distribuzione: il sito deve continuare a usare
+   il medesimo URL /exec già collegato.
+6) Fai un test con una prenotazione futura (giovedì-domenica) e verifica
+   email di attesa, email al gestore e risposta di conferma o rifiuto.
 
-1) Con il proprio account Google apri https://script.google.com e crea un progetto.
-2) Incolla il codice completo di setup-prenotazioni/Code.gs nell'editor.
-3) Controlla SETTINGS.OWNER_EMAIL (attualmente ilsemaforo.pizzeria@gmail.com).
-4) Imposta fuso orario Europe/Rome.
-5) Esegui una volta installDailyCleanup e autorizza lo script.
-6) Distribuisci > Nuova distribuzione > Applicazione web,
-   Esegui come: Me, Accesso: Chiunque. Copia l'URL finale /exec.
-7) In prenotazioni.html sostituisci:
-     action="URL_APP_SCRIPT_DA_CONFIGURARE"
-   con l'URL completo /exec ricevuto da Apps Script.
-8) Ricarica prenotazioni.html su GitHub e fai un TEST con email vere.
-9) Usa l'email di gestione ricevuta per confermare o rifiutare. Il cliente
-   ricevera' automaticamente il messaggio di esito dopo la tua decisione.
+REGOLE ATTUALI
+- Calendario dal giovedì alla domenica. Le frecce del calendario permettono
+  di navigare tra i mesi senza chiudere la finestra.
+- Da 1 a 10 persone: prenotazione online; oltre 10 persone: chiamare.
+- Tipo di menù obbligatorio: Giro pizza oppure
+  Primi e secondi del giorno dello chef.
+- Gli stessi valori sono convalidati anche dal codice Apps Script.
+  ATTENZIONE: finché non ridistribuisci il codice aggiornato nel progetto
+  Google, il server può rifiutare il nuovo tipo di menù.
+- La prenotazione è confermata solo dopo l'email definitiva del gestore.
 
 I LIMITI DELLA VERSIONE GRATUITA
 Sono applicati i limiti gratuiti di invio quotidiano Google Apps Script,
