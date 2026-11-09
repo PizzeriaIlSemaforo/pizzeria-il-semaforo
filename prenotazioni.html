@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="#19231e" name="theme-color"/><title>Prenotazioni — Pizzeria Il Semaforo</title><meta content="Richiedi un tavolo alla Pizzeria Il Semaforo di Campi Bisenzio: prenotazione online e conferma personale via email." name="description"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="images/logo1.jpg" rel="icon"/><link href="./style.css" rel="stylesheet"/><script defer="" src="./app.js"></script></head><body><a class="skip" href="#main">Vai al contenuto</a><header class="site-header"><div class="head-inner wrap">
+<a aria-label="Il Semaforo: torna alla Home" class="brand" href="index.html">
+<img alt="Logo originale della Pizzeria Il Semaforo" height="75" src="images/logo1.jpg" width="75"/>
+<span class="brand-words"><span class="brand-name">Il Semaforo</span><span class="brand-sub">RISTORANTE &amp; PIZZERIA</span></span></a>
+<nav aria-label="Navigazione principale" class="nav-links" id="mainNav"><a href="index.html">Home</a><a href="il-locale.html">Il locale</a><a href="menu.html">Menù</a><a href="galleria.html">Galleria</a><a href="chi-siamo.html">Chi siamo</a><a href="recensioni.html">Recensioni</a><a href="contatti.html">Contatti</a></nav>
+<a class="head-book is-current" href="prenotazioni.html">PRENOTA UN TAVOLO <span aria-hidden="true">↗</span></a>
+<button aria-controls="mainNav" aria-expanded="false" aria-label="Apri il menù" class="menu-toggle" id="menuToggle" type="button"><span></span><span></span><span></span></button>
+</div></header>
+<main id="main">
+<section class="page-hero page-hero-short">
+<img alt="Allestimento di una sala per una cena al Semaforo" class="page-hero-photo" src="images/1.jpeg"/>
+<div class="page-hero-shade"></div><div class="wrap page-hero-inner">
+<div class="eyebrow light">PRENOTAZIONI</div><h1>Una serata da <em>condividere.</em></h1>
+<p>Invia la tua richiesta: ti risponderemo per email dopo aver verificato la disponibilità.</p>
+</div>
+</section>
+<section class="section-pad" id="prenota">
+<div class="wrap">
+<div class="booking-email-intro"><div class="eyebrow">PRENOTA IL TUO TAVOLO</div>
+<h2>Ti aspettiamo <em>al Semaforo.</em></h2>
+<p>Compila i dettagli della serata. Riceverai subito una mail che conferma la ricezione della richiesta; la prenotazione sarà valida solo dopo una seconda email di conferma da parte nostra.</p>
+<p class="booking-hours-note">Aperti dal giovedì alla domenica, dalle 19:00 alle 23:00. Le richieste non sono confermate fino alla nostra email definitiva.</p></div>
+<div class="booking-email-layout">
+<aside aria-label="Come funziona la prenotazione" class="booking-email-aside">
+<div class="eyebrow light">COME FUNZIONA</div><h3>Prenota in tutta semplicità.</h3>
+<p>Un sistema chiaro e senza intermediari. Nessun messaggio da scrivere e nessun pagamento online.</p>
+<ol class="booking-email-flow">
+<li><span>01</span><div><b>Invia la richiesta</b><p>Compila il modulo e premi Invia prenotazione.</p></div></li>
+<li><span>02</span><div><b>Ricevi la mail di attesa</b><p>Ti confermeremo subito che la richiesta è stata ricevuta.</p></div></li>
+<li><span>03</span><div><b>Attendi la nostra decisione</b><p>Ti invieremo un'email di conferma o indisponibilità.</p></div></li>
+</ol>
+<p>Preferisci chiamarci?<br/><a href="tel:+393403046310">+39 340 304 6310</a></p>
+</aside>
+<div class="booking-email-card">
+<h3>Richiedi un tavolo</h3>
+<p>I campi contrassegnati con * sono obbligatori.</p>
+<!-- Inserire l'URL /exec del servizio Apps Script dopo la pubblicazione. -->
+<form accept-charset="UTF-8" action="URL_APP_SCRIPT_DA_CONFIGURARE" id="emailBookingForm" method="POST">
+<input name="mode" type="hidden" value="booking"/>
+<label aria-hidden="true" class="booking-email-hp">Non compilare questo campo<input autocomplete="off" name="website" tabindex="-1"/></label>
+<div class="booking-email-grid">
+<div class="booking-email-field full"><label for="guestName">Nome e cognome <em>*</em></label><input autocomplete="name" id="guestName" maxlength="80" minlength="3" name="guestName" placeholder="Es. Mario Rossi" required="" type="text"/></div>
+<div class="booking-email-field"><label for="guestEmail">Indirizzo email <em>*</em></label><input autocomplete="email" id="guestEmail" maxlength="150" name="guestEmail" placeholder="nome@esempio.it" required="" type="email"/><small>Qui riceverai le comunicazioni sulla prenotazione.</small></div>
+<div class="booking-email-field"><label for="guestPhone">Numero di telefono <em>*</em></label><input autocomplete="tel" id="guestPhone" inputmode="tel" maxlength="22" minlength="8" name="guestPhone" placeholder="Es. 340 123 4567" required="" type="tel"/></div>
+<div class="booking-email-field"><label for="guestDate">Data <em>*</em></label><input id="guestDate" name="guestDate" required="" type="date"/></div>
+<div class="booking-email-field"><label for="guestTime">Orario <em>*</em></label><select id="guestTime" name="guestTime" required=""><option value="">Seleziona l'orario</option><option value="19:00">19:00</option><option value="19:30">19:30</option><option value="20:00">20:00</option><option value="20:30">20:30</option><option value="21:00">21:00</option><option value="21:30">21:30</option><option value="22:00">22:00</option><option value="22:30">22:30</option></select></div>
+<div class="booking-email-field"><label for="guestPeople">Numero di persone <em>*</em></label><input id="guestPeople" max="80" min="1" name="guestPeople" placeholder="Es. 4" required="" step="1" type="number"/></div>
+<div class="booking-email-field"><label for="guestMenu">Occasione</label><select id="guestMenu" name="guestMenu"><option value="Da decidere">Da decidere</option><option value="Giro pizza">Giro pizza</option><option value="Menù alla carta">Menù alla carta</option><option value="Cena privata / evento">Cena privata / evento</option></select></div>
+<div class="booking-email-field full"><label for="guestNotes">Note o richieste particolari</label><textarea id="guestNotes" maxlength="400" name="guestNotes" placeholder="Es. seggiolone, festa di compleanno, allergie o altre esigenze da comunicare..."></textarea><small>Per informazioni importanti sulle allergie contatta anche direttamente il personale.</small></div>
+</div>
+<label class="booking-email-consent"><input name="privacyConsent" required="" type="checkbox" value="yes"/><span>Ho letto l'<a href="privacy.html" rel="noopener noreferrer" target="_blank">informativa privacy</a> e autorizzo il trattamento dei dati necessari a gestire questa richiesta di prenotazione.</span></label>
+<button class="booking-email-submit" type="submit">INVIA PRENOTAZIONE <span aria-hidden="true">→</span></button>
+<p class="booking-email-note">L'invio è gratuito. Non viene richiesto alcun pagamento. La richiesta non equivale a una prenotazione confermata.</p>
+<div aria-live="polite" class="booking-email-status" hidden="" id="bookingStatus" role="status"></div>
+</form>
+</div></div>
+<div class="booking-email-footer">UN SOLO INVIO · CONFERMA PERSONALE · NESSUN ACCOUNT NECESSARIO</div>
+</div>
+</section>
+</main><footer class="footer"><div class="wrap footer-main">
+<div class="footer-brand"><img alt="Logo Pizzeria Il Semaforo" height="88" src="images/logo1.jpg" width="88"/><div><strong>Il Semaforo</strong><span>RISTORANTE &amp; PIZZERIA</span><p>La buona cucina, il piacere di stare insieme.</p></div></div>
+<div class="footer-links"><a href="index.html">Home</a><a href="il-locale.html">Il locale</a><a href="menu.html">Menù</a><a href="galleria.html">Galleria</a><a href="chi-siamo.html">Chi siamo</a><a href="recensioni.html">Recensioni</a><a href="contatti.html">Contatti</a><a href="prenotazioni.html">Prenotazioni</a></div>
+<div class="footer-social"><strong>SEGUICI</strong><a href="https://www.instagram.com/pizzeriailsemaforo" rel="noopener noreferrer" target="_blank">Instagram ↗</a><a href="https://www.facebook.com/share/1C1YCfUDes/" rel="noopener noreferrer" target="_blank">Facebook ↗</a><a href="https://www.tiktok.com/@ilsemaforopizzeria" rel="noopener noreferrer" target="_blank">TikTok ↗</a></div><div class="footer-where"><strong>DOVE SIAMO</strong><span>Via Palagetta · 50013 Campi Bisenzio (FI)</span><span>Giovedì – Domenica · 19:00–23:00</span></div></div>
+<div class="wrap footer-bottom"><span>© <span id="year">2026</span> Pizzeria Il Semaforo · P.IVA 07270540482</span><span><a href="privacy.html">Privacy e trattamento dati</a></span></div></footer>
+
+<dialog aria-label="Visualizza fotografia" class="lightbox" id="lightbox"><button aria-label="Chiudi fotografia" class="lightbox-close" data-close-lightbox="" type="button">×</button><img alt="" src=""/><p id="lightboxCaption"></p></dialog>
+</body></html>
