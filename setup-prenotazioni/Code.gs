@@ -171,7 +171,7 @@ function validateBooking_(p) {
   const clean = (x,n) => String(x || '').trim().replace(/[\u0000-\u001f\u007f]/g,' ').replace(/\s+/g,' ').slice(0,n);
   const name = clean(p.guestName,80), email = clean(p.guestEmail,150).toLowerCase();
   const phone = clean(p.guestPhone,22), date = clean(p.guestDate,10), time=clean(p.guestTime,5);
-  const people = Number(p.guestPeople), menu=clean(p.guestMenu,50)||'Da decidere', notes=clean(p.guestNotes,400);
+  const people = Number(p.guestPeople), menu=clean(p.guestMenu,65), notes=clean(p.guestNotes,400);
   if (name.length < 3 || name.split(' ').length < 2) throw new Error('Inserisci nome e cognome.');
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Inserisci un indirizzo email valido.');
   if (!/^\+?[0-9\s()\-]{8,22}$/.test(phone)) throw new Error('Inserisci un numero di telefono valido.');
@@ -181,7 +181,7 @@ function validateBooking_(p) {
   if (weekday >= 1 && weekday <= 3) throw new Error('Seleziona un giorno di apertura: giovedì, venerdì, sabato o domenica.');
   if (!Number.isInteger(people) || people < 1) throw new Error('Indica un numero valido di persone.');
   if (people > 10) throw new Error('Per prenotazioni superiori a 10 persone chiamaci al +39 340 304 6310.');
-  if (!['Da decidere','Giro pizza','Menù alla carta','Cena privata / evento'].includes(menu)) throw new Error('Seleziona un tipo di cena valido.');
+  if (!['Giro pizza','Primi e secondi del giorno dello chef'].includes(menu)) throw new Error('Seleziona un tipo di menù valido.');
   if (p.privacyConsent !== 'yes') throw new Error('Inserisci il consenso alla privacy.');
   const today = Utilities.formatDate(new Date(),SETTINGS.TZ,'yyyy-MM-dd');
   const nowTime = Utilities.formatDate(new Date(),SETTINGS.TZ,'HH:mm');
@@ -236,7 +236,7 @@ function findByToken_(token) {
 function escapeHtml_(s) {return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function dateLabel_(d) {const a=String(d).split('-');return escapeHtml_((a[2]||'')+'/'+(a[1]||'')+'/'+(a[0]||''));}
 function infoRows_(b) {
-  const rows = [['Riferimento',b.code],['Nome',b.name],['Data',dateLabel_(b.date)],['Orario',b.time],['Persone',b.people],['Tipo di cena',b.menu]];
+  const rows = [['Riferimento',b.code],['Nome',b.name],['Data',dateLabel_(b.date)],['Orario',b.time],['Persone',b.people],['Tipo di menù',b.menu]];
   return rows.map(([l,v])=>`<tr><td style="padding:10px 0;color:#657367;font-size:13px;border-bottom:1px solid #e8e6df">${escapeHtml_(l)}</td><td style="padding:10px 0;text-align:right;color:#223629;font-weight:600;font-size:14px;border-bottom:1px solid #e8e6df">${escapeHtml_(v)}</td></tr>`).join('');
 }
 function mailShell_(overline,title,body) {
