@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#18291e">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Gestisci prenotazione | Pizzeria Il Semaforo</title>
+<link rel="icon" href="images/logo1.jpg">
+<style>
+:root{color-scheme:light;font-family:Arial,Helvetica,sans-serif;color:#20352a;background:#f5f3ed}
+*{box-sizing:border-box}body{margin:0}a{color:inherit}
+.manager-head{background:#192c20;color:#fff}
+.manager-head-inner{max-width:850px;margin:auto;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.manager-brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:600 19px Georgia,serif}
+.manager-brand img{width:52px;height:52px;object-fit:contain;border-radius:50%;background:#fff}
+.manager-return{font-size:12px;color:#ecd5ac;text-underline-offset:4px}
+.manager-main{max-width:650px;margin:clamp(24px,6vw,60px) auto;padding:0 16px 32px}
+.manager-card{background:#fff;border:1px solid #e4e1d7;box-shadow:0 14px 35px #203c2914;overflow:hidden}
+.manager-line{height:6px;background:#b48f4c}.manager-card[data-state=confirm] .manager-line{background:#267248}
+.manager-card[data-state=reject] .manager-line{background:#b54a42}
+.manager-content{padding:clamp(24px,6vw,44px)}
+.manager-kicker{font-size:11px;letter-spacing:.14em;color:#98774b;font-weight:700}
+h1{font:normal clamp(29px,6vw,40px)/1.16 Georgia,serif;letter-spacing:-.03em;margin:13px 0 15px}
+.manager-lead{font-size:15px;line-height:1.75;color:#637167;margin:0 0 24px}
+.manager-summary{display:grid;gap:10px;padding:18px 20px;background:#f8f7f2;border:1px solid #ece9e0;margin:24px 0}
+.manager-summary span{font-size:12px;color:#707c73}.manager-summary strong{font-size:15px;letter-spacing:.035em}
+.manager-state{border-left:4px solid #d6aa4d;background:#fff6e4;padding:15px 17px;margin:20px 0;color:#795a26;font-size:13px;line-height:1.7}
+.manager-state[data-choice=confirm]{border-color:#38915c;background:#e9f5ed;color:#235638}
+.manager-state[data-choice=reject]{border-color:#cb5b50;background:#fff0ec;color:#793c34}
+.manager-state b{display:block;font-size:14px}
+.manager-button{border:0;border-radius:4px;padding:17px 19px;width:100%;background:#276a42;color:white;font-weight:700;letter-spacing:.025em;font-size:14px;cursor:pointer;min-height:55px}
+.manager-button.reject{background:#a9473d}.manager-button:disabled{opacity:.55;cursor:not-allowed}
+.manager-help{margin:15px 0 0;color:#667369;font-size:12px;line-height:1.75}
+.manager-error{padding:16px;background:#fff0ec;border-left:4px solid #bd5248;color:#80352f;font-size:14px;line-height:1.6}
+.manager-foot{max-width:850px;margin:0 auto;padding:0 20px 25px;color:#677369;font-size:12px;text-align:center;line-height:1.7}
+.manager-foot a{text-underline-offset:3px}
+@media(max-width:540px){.manager-head-inner{padding:12px 16px}.manager-brand{font-size:16px}.manager-brand img{width:42px;height:42px}.manager-return{font-size:11px}.manager-main{margin:18px auto 8px}.manager-summary{margin:18px 0}h1{font-size:31px}}
+</style>
+</head>
+<body>
+<header class="manager-head">
+ <div class="manager-head-inner">
+  <a class="manager-brand" href="index.html"><img src="images/logo1.jpg" alt="">Il Semaforo</a>
+  <a class="manager-return" href="index.html">Torna al sito</a>
+ </div>
+</header>
+<main class="manager-main">
+ <section class="manager-card" id="managerCard" aria-labelledby="managerTitle">
+  <div class="manager-line"></div>
+  <div class="manager-content">
+   <div class="manager-kicker">GESTIONE RISERVATA DELLE PRENOTAZIONI</div>
+   <h1 id="managerTitle">Verifica la richiesta.</h1>
+   <p class="manager-lead" id="managerIntro">Controlla l'operazione prima di confermarla. Nessun messaggio sarà inviato al cliente finché non premi il pulsante.</p>
+   <div class="manager-summary"><span>CODICE PRENOTAZIONE</span><strong id="bookingRef">Caricamento...</strong></div>
+   <div class="manager-state" id="managerState" role="status">
+    <b id="managerStateTitle">Decisione da confermare</b>
+    <span id="managerStateText">L'esito definitivo verrà inviato via email soltanto dopo la tua conferma.</span>
+   </div>
+   <form id="decisionForm" method="post" action="https://script.google.com/macros/s/AKfycbxKzVUQnjapS-15SP4ZAQwzQ8GtDihsGUGzY5HkmMooVB3_TW7rtn__wA9TRp1IYxbP/exec" hidden>
+    <input type="hidden" name="mode" value="decision">
+    <input type="hidden" name="token" id="bookingToken">
+    <input type="hidden" name="action" id="bookingAction">
+    <button id="decisionButton" class="manager-button" type="submit">Conferma prenotazione e invia l'email</button>
+   </form>
+   <div class="manager-error" id="managerError" hidden>Collegamento non valido o incompleto. Apri il pulsante presente nell'email originale della richiesta. Se il problema persiste, gestisci la prenotazione dal computer.</div>
+   <p class="manager-help">Questa pagina serve esclusivamente alla gestione delle richieste ricevute. Non condividere il collegamento con altre persone. Per controllare data, ora e numero di ospiti consulta l'email originale.</p>
+  </div>
+ </section>
+</main>
+<footer class="manager-foot">Pizzeria Il Semaforo · Via Palagetta, Campi Bisenzio · <a href="tel:+393403046310">340 304 6310</a></footer>
+<script>
+(function(){
+  'use strict';
+  var params=new URLSearchParams(location.hash.replace(/^#/,''));
+  var token=params.get('manage')||'';
+  var action=params.get('action')||'';
+  var ref=params.get('ref')||'';
+  // Il token è privato: rimuovilo subito dalla barra degli indirizzi e dalla cronologia.
+  try {history.replaceState(null,'',location.pathname+location.search);} catch(e){}
+  var card=document.getElementById('managerCard');
+  var form=document.getElementById('decisionForm');
+  var button=document.getElementById('decisionButton');
+  var state=document.getElementById('managerState');
+  var error=document.getElementById('managerError');
+  var valid=/^[a-f0-9-]{72}$/.test(token)&&(action==='confirm'||action==='reject');
+  if(!valid){
+    document.getElementById('managerTitle').textContent='Collegamento non valido';
+    document.getElementById('bookingRef').textContent='Nessuna richiesta identificata';
+    state.hidden=true;error.hidden=false;return;
+  }
+  document.getElementById('bookingToken').value=token;
+  document.getElementById('bookingAction').value=action;
+  document.getElementById('bookingRef').textContent=/^SEM-[A-Z0-9-]{8,40}$/.test(ref)?ref:'Consulta il codice nella tua email';
+  card.dataset.state=action;
+  state.dataset.choice=action;
+  var isConfirm=action==='confirm';
+  document.getElementById('managerTitle').textContent=isConfirm?'Conferma il tavolo.':'Non confermare il tavolo.';
+  document.getElementById('managerStateTitle').textContent=isConfirm?'PRENOTAZIONE DA CONFERMARE':'RICHIESTA DA RIFIUTARE';
+  document.getElementById('managerStateText').textContent=isConfirm
+    ?'Premendo il pulsante invierai al cliente la conferma definitiva della prenotazione.'
+    :'Premendo il pulsante informerai il cliente che non è possibile confermare il tavolo richiesto.';
+  button.textContent=isConfirm?'Conferma prenotazione e invia l’email':'Rifiuta prenotazione e avvisa il cliente';
+  button.classList.toggle('reject',!isConfirm);
+  form.hidden=false;
+  form.addEventListener('submit',function(){
+    button.disabled=true;
+    button.textContent='Invio della decisione in corso…';
+  });
+})();
+</script>
+</body>
+</html>
