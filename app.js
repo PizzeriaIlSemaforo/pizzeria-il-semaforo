@@ -51,6 +51,8 @@
     button.setAttribute('aria-haspopup','dialog');button.setAttribute('aria-expanded','false');
     const panel=document.createElement('div');
     panel.id='bookingDateCalendar';panel.className='booking-calendar';panel.hidden=true;
+    // I click sulle frecce ricreano i pulsanti: non devono chiudere il calendario.
+    panel.addEventListener('click', event => event.stopPropagation());
     panel.setAttribute('role','dialog');panel.setAttribute('aria-label','Calendario prenotazioni');
     input.insertAdjacentElement('afterend',button);button.insertAdjacentElement('afterend',panel);
     field.querySelector('label[for="guestDate"]')?.setAttribute('for',button.id);
@@ -58,7 +60,17 @@
     const close=(focus=false)=>{panel.hidden=true;button.setAttribute('aria-expanded','false');if(focus)button.focus();};
     const nav=(name,label,disabled,cb)=>{
       const b=document.createElement('button');b.type='button';b.className='booking-calendar-nav';
-      b.textContent=label;b.disabled=disabled;b.setAttribute('aria-label',name);b.addEventListener('click',cb);return b;
+      b.textContent=label;b.disabled=disabled;b.setAttribute('aria-label',name);
+      b.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        cb();
+        // Ripristina il focus sul pulsante ricreato per navigare tra i mesi consecutivamente.
+        const replacement=Array.from(panel.querySelectorAll('.booking-calendar-nav'))
+          .find(el=>el.getAttribute('aria-label')===name&&!el.disabled);
+        (replacement||panel.querySelector('.booking-calendar-nav:not(:disabled)'))?.focus();
+      });
+      return b;
     };
     function render(){
       const t=today(),first=new Date(t.getFullYear(),t.getMonth(),1);
