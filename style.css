@@ -169,3 +169,26 @@ dialog{border:0;padding:0;max-width:calc(100% - 30px)}dialog::backdrop{backgroun
 .home-offer-card:first-child .home-offer-photo img { filter:saturate(1.03) contrast(1.09) brightness(1.025); }
 .photo-card img { image-rendering:auto; }
 @media (min-width:901px) { .gallery-photo[data-image="9.jpg"] img, .gallery-photo[data-image="3.jpg"] img, .gallery-photo[data-image="4.jpg"] img, .gallery-photo[data-image="5.jpg"] img, .gallery-photo[data-image="6.jpg"] img, .gallery-photo[data-image="8.jpg"] img { object-fit:cover; } }
+
+/* Date aperte e gruppi: esperienza prenotazione */
+.booking-email-field:has(.booking-calendar){position:relative}
+.booking-date-trigger{min-height:51px;width:100%;border:1px solid #ccd0c7;background:#fff;color:#283b2d;text-align:left;padding:12px 40px 12px 13px;cursor:pointer;font:inherit;font-size:14px;position:relative}
+.booking-date-trigger::after{content:'▦';position:absolute;right:13px;font-size:19px;color:#b18c5e}
+.booking-date-trigger:focus-visible{outline:2px solid #b39161}
+.booking-calendar[hidden],.booking-group-notice[hidden]{display:none!important}
+.booking-calendar{position:absolute;left:0;top:calc(100% - 15px);width:min(360px,calc(100vw - 55px));z-index:100;background:#fffefb;border:1px solid #d9d8d0;box-shadow:0 18px 48px rgba(22,35,27,.2);padding:16px}
+.booking-calendar-header{display:grid;grid-template-columns:40px 1fr 40px;align-items:center;margin-bottom:10px}
+.booking-calendar-header strong{text-align:center;text-transform:capitalize;font-size:14px}
+.booking-calendar-nav{width:38px;height:38px;border:1px solid #e7e4dd;background:#f7f4ed;color:#27402f;font-size:25px;cursor:pointer}
+.booking-calendar-nav:disabled{opacity:.3;cursor:not-allowed}
+.booking-calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.booking-calendar-weekday{display:grid;place-items:center;height:30px;font-weight:700;font-size:11px;color:#536553}
+.booking-calendar-day{min-width:0;height:38px;border:0;background:#edf2e8;color:#23452d;font-weight:700;cursor:pointer}
+.booking-calendar-day:hover:not(:disabled){background:#d5e7cd}
+.booking-calendar-day:focus-visible{outline:2px solid #74966e}
+.booking-calendar-day:disabled{background:#f7f6f4;color:#b8bbb7;cursor:not-allowed;text-decoration:line-through}
+.booking-calendar-day.is-selected:not(:disabled){background:#263f2e;color:#fff}
+.booking-calendar-note{text-align:center;font-size:11px;color:#637064;margin:13px 0 0}
+.booking-group-notice{margin:3px 0 0;padding:13px 15px;background:#fff0eb;border-left:3px solid #a43d32;color:#722d25;font-size:13px;line-height:1.65}
+.booking-group-notice a{color:#722d25;text-decoration:underline;font-weight:700}
+.booking-hours-note a{text-decoration:underline;color:#314f3b;font-weight:700}

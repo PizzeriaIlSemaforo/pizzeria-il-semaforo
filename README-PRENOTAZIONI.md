@@ -44,8 +44,11 @@ NOTE OPERATIVE
 - Orario: Giovedi-Domenica, 19:00-23:00.
 - Le fotografie originali del repository non sono state modificate.
 
-FOTOGRAFIE
-La versione pubblicata usa gli scatti originali e sceglie foto con risoluzione
-migliore per gli sfondi grandi. Le immagini 3-10.jpg sono thumbnail a bassa
-risoluzione: se desideri maggiore dettaglio, carica gli originali ad alta
-risoluzione degli stessi scatti e li sostituiremo senza alterare la scena.
+AGGIORNAMENTO NOVEMBRE 2026
+- Calendario del sito: lunedì, martedì e mercoledì non selezionabili (fallback e backend li rifiutano comunque).
+- Prenotazioni online: massimo 10 persone. Per 11 o più persone il modulo richiede di telefonare al 340 304 6310.
+- Email: giallo = in attesa, verde = confermata, rosso = non confermata.
+- IMPORTANTE: il codice Apps Script nel repository NON si aggiorna automaticamente sul servizio Google attivo.
+  Per applicare i nuovi controlli e le nuove email, sostituisci il codice Apps Script
+  con setup-prenotazioni/Code.gs e aggiorna la distribuzione web esistente alla nuova versione.
+  L'URL /exec può rimanere invariato se aggiorni la stessa distribuzione.

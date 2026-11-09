@@ -43,10 +43,10 @@ function doPost(e) {
       `<span class="pill">RICHIESTA IN ATTESA</span><h2>Grazie, ${escapeHtml_(booking.name.split(' ')[0])}.</h2>` +
       `<p>Abbiamo ricevuto la richiesta <strong>${escapeHtml_(booking.code)}</strong> per <strong>${dateLabel_(booking.date)}</strong> alle <strong>${escapeHtml_(booking.time)}</strong>.</p>` +
       `<p>Ti abbiamo inviato un'email a <strong>${escapeHtml_(booking.email)}</strong> con il riepilogo. Controlla anche la cartella spam.</p>` +
-      '<div class="notice">Il tavolo non è ancora confermato. Riceverai una seconda email quando il nostro staff avrà verificato la disponibilità.</div>');
+      '<div class="notice" style="background:#fff4d9;border-left:4px solid #e8bd61;color:#825511;padding:18px"><b>IN ATTESA DI CONFERMA</b><br>Il tavolo non è ancora confermato. Riceverai una seconda email dopo la verifica.</div>');
   } catch (err) {
     console.error('Errore prenotazione: ' + String(err));
-    const message = /^(Inserisci|Indica|Seleziona|La data|Troppe|Questa richiesta|Il servizio|Non risultano|Le richieste)/.test(String(err.message))
+    const message = /^(Inserisci|Indica|Seleziona|La data|Per prenotazioni|Troppe|Questa richiesta|Il servizio|Non risultano|Le richieste)/.test(String(err.message))
       ? err.message
       : 'Non siamo riusciti a completare la richiesta. Riprova più tardi o chiamaci.';
     return webpage_('Richiesta non inviata', `<p>${escapeHtml_(message)}</p><p>Nessun tavolo è stato confermato.</p>`);
@@ -96,7 +96,7 @@ function createBooking_(input) {
         to: SETTINGS.OWNER_EMAIL,
         replyTo: booking.email,
         name: SETTINGS.RESTAURANT,
-        subject: `NUOVA RICHIESTA • ${booking.code} • ${booking.date} ${booking.time}`,
+        subject: `🟡 DA CONFERMARE · ${booking.code} · ${booking.date} ${booking.time}`,
         body: ownerPlain_(booking, appUrl),
         htmlBody: ownerHtml_(booking, appUrl)
       });
@@ -113,7 +113,7 @@ function createBooking_(input) {
         to: booking.email,
         replyTo: SETTINGS.OWNER_EMAIL,
         name: SETTINGS.RESTAURANT,
-        subject: 'Richiesta ricevuta — In attesa di conferma | Il Semaforo',
+        subject: '🟡 Richiesta ricevuta · IN ATTESA DI CONFERMA | Il Semaforo',
         body: customerPlain_(booking,'PENDING'),
         htmlBody: customerHtml_(booking,'PENDING')
       });
@@ -153,7 +153,7 @@ function processDecision(token, action) {
         to: booking.email,
         replyTo: SETTINGS.OWNER_EMAIL,
         name: SETTINGS.RESTAURANT,
-        subject: next === 'CONFIRMED' ? 'Prenotazione CONFERMATA | Il Semaforo' : 'Aggiornamento sulla tua richiesta | Il Semaforo',
+        subject: next === 'CONFIRMED' ? '🟢 Prenotazione CONFERMATA | Il Semaforo' : '🔴 Richiesta NON CONFERMATA | Il Semaforo',
         body: customerPlain_(booking,next),
         htmlBody: customerHtml_(booking,next)
       });
@@ -179,7 +179,8 @@ function validateBooking_(p) {
   if (!/^((19|20|21|22):(00|30))$/.test(time)) throw new Error('Seleziona un orario valido.');
   const weekday = new Date(date+'T12:00:00Z').getUTCDay();
   if (weekday >= 1 && weekday <= 3) throw new Error('Seleziona un giorno di apertura: giovedì, venerdì, sabato o domenica.');
-  if (!Number.isInteger(people) || people < 1 || people > 80) throw new Error('Indica da 1 a 80 persone.');
+  if (!Number.isInteger(people) || people < 1) throw new Error('Indica un numero valido di persone.');
+  if (people > 10) throw new Error('Per prenotazioni superiori a 10 persone chiamaci al +39 340 304 6310.');
   if (!['Da decidere','Giro pizza','Menù alla carta','Cena privata / evento'].includes(menu)) throw new Error('Seleziona un tipo di cena valido.');
   if (p.privacyConsent !== 'yes') throw new Error('Inserisci il consenso alla privacy.');
   const today = Utilities.formatDate(new Date(),SETTINGS.TZ,'yyyy-MM-dd');
@@ -239,11 +240,20 @@ function infoRows_(b) {
   return rows.map(([l,v])=>`<tr><td style="padding:10px 0;color:#657367;font-size:13px;border-bottom:1px solid #e8e6df">${escapeHtml_(l)}</td><td style="padding:10px 0;text-align:right;color:#223629;font-weight:600;font-size:14px;border-bottom:1px solid #e8e6df">${escapeHtml_(v)}</td></tr>`).join('');
 }
 function mailShell_(overline,title,body) {
-  return '<!doctype html><html lang="it"><body style="margin:0;background:#f4f1ea;padding:28px 10px;font-family:Arial,sans-serif;color:#213529">'+
-   '<table role="presentation" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#fffefb;margin:auto"><tr><td style="padding:29px 40px;background:#1c2b20;color:#fff">'+
-   '<div style="font-family:Georgia,serif;font-size:29px">Il Semaforo</div><div style="font-size:10px;letter-spacing:3px;color:#d8bb89;margin-top:7px">RISTORANTE &amp; PIZZERIA</div></td></tr><tr><td style="padding:39px 40px">'+
-   `<div style="color:#ae8956;letter-spacing:2px;font-size:11px;font-weight:700">${escapeHtml_(overline)}</div><h1 style="font-family:Georgia,serif;font-weight:400;font-size:31px;line-height:1.22;margin:13px 0 22px;color:#1c3024">${escapeHtml_(title)}</h1>`+body+
-   '</td></tr><tr><td style="padding:23px 40px;background:#f5f2ea;color:#6a756b;font-size:12px;line-height:1.65">Pizzeria Il Semaforo · Via Palagetta, 50013 Campi Bisenzio (FI)<br>Aperto giovedì–domenica, 19:00–23:00<br>Telefono: +39 340 304 6310 · Per assistenza rispondi a questa email.</td></tr></table></body></html>';
+  const pending=overline==='NUOVA RICHIESTA'||overline==='IN ATTESA DI CONFERMA';
+  const confirmed=overline==='TAVOLO CONFERMATO';
+  const t=pending?{bg:'#fff4d9',fg:'#825511',edge:'#e8bd61',label:'IN ATTESA DI CONFERMA',desc:'Richiesta ricevuta: il tavolo NON è ancora confermato.'}:
+    confirmed?{bg:'#e6f5eb',fg:'#16643c',edge:'#65aa80',label:'PRENOTAZIONE CONFERMATA',desc:'Il tuo tavolo è confermato dal nostro staff.'}:
+    {bg:'#ffedeb',fg:'#9b352e',edge:'#df8279',label:'RICHIESTA NON CONFERMATA',desc:'Non abbiamo disponibilità per la data e l’orario richiesti.'};
+  return '<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;background:#f1f2ed;font-family:Arial,Helvetica,sans-serif">'+
+    '<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background:#f1f2ed;border-collapse:collapse"><tr><td style="padding:30px 12px">'+
+    '<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:620px;margin:auto;background:#fff;border-collapse:collapse">'+
+    '<tr><td style="padding:29px 32px;background:#1e3025;color:white"><div style="font:30px Georgia,serif">Il Semaforo</div><div style="font-size:10px;letter-spacing:2.3px;margin-top:9px;color:#e8d0a2;font-weight:700">RISTORANTE &amp; PIZZERIA · CAMPI BISENZIO</div></td></tr>'+
+    '<tr><td style="padding:24px 32px;background:'+t.bg+';color:'+t.fg+';border-bottom:3px solid '+t.edge+'"><div style="font-size:12px;letter-spacing:1.2px;font-weight:800">&#9679; '+escapeHtml_(t.label)+'</div><div style="font-size:14px;line-height:1.65;margin-top:8px">'+escapeHtml_(t.desc)+'</div></td></tr>'+
+    '<tr><td style="padding:32px 32px 35px"><div style="font-size:10px;letter-spacing:1.5px;color:#92744d;font-weight:700">'+escapeHtml_(overline)+'</div>'+
+    '<h1 style="font:400 29px/1.2 Georgia,serif;color:#213a2a;margin:12px 0 22px">'+escapeHtml_(title)+'</h1>'+body+'</td></tr>'+
+    '<tr><td style="padding:23px 32px;background:#f6f7f2;color:#526155;font-size:12px;line-height:1.8;border-top:1px solid #e1e7dc"><b>Pizzeria Il Semaforo</b><br>Via Palagetta, 50013 Campi Bisenzio (FI)<br>Giovedì–domenica · 19:00–23:00<br>Telefono: +39 340 304 6310<br>Per modifiche puoi rispondere a questa email.</td></tr></table>'+
+    '<div style="text-align:center;color:#738075;font-size:11px;padding:17px 0">Email automatica relativa alla tua prenotazione al Semaforo.</div></td></tr></table></body></html>';
 }
 function ownerPlain_(b,url) {return `NUOVA RICHIESTA ${b.code}\n${b.name} | ${b.email} | ${b.phone}\n${b.date} ore ${b.time} | ${b.people} persone\n${b.menu}\nNote: ${b.notes||'Nessuna'}\n\nApri per confermare: ${url}?manage=${encodeURIComponent(b.manageToken)}&action=confirm\nApri per rifiutare: ${url}?manage=${encodeURIComponent(b.manageToken)}&action=reject\nI link sono riservati.`;}
 function ownerHtml_(b,url) {
