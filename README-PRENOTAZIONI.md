@@ -57,3 +57,42 @@ AGGIORNAMENTO NOVEMBRE 2026
   Per applicare i nuovi controlli e le nuove email, sostituisci il codice Apps Script
   con setup-prenotazioni/Code.gs e aggiorna la distribuzione web esistente alla nuova versione.
   L'URL /exec può rimanere invariato se aggiorni la stessa distribuzione.
+
+CONFERMA DAL CELLULARE (AGGIORNAMENTO)
+È stata introdotta gestisci-prenotazione.html, una pagina dedicata sul sito
+GitHub Pages per confermare o rifiutare anche da Gmail su Android/iPhone.
+
+Le NUOVE email di gestione, generate dopo l'aggiornamento del codice Google
+Apps Script, puntano a questa pagina anziché direttamente a script.google.com.
+Il gestore apre il collegamento e preme "Conferma" o "Rifiuta".
+Il pulsante invia in POST la decisione ad Apps Script, che registra l'esito
+ed invia l'email al cliente. L'apertura della pagina NON conferma alcunché.
+
+IMPORTANTE: le email inviate PRIMA della ridistribuzione contengono ancora
+i vecchi collegamenti diretti Google e non possono cambiare retroattivamente.
+Per applicare la correzione alle email successive, apri il progetto Google
+Apps Script e sostituisci Code.gs con la versione del repository.
+Poi vai su Distribuisci > Gestisci distribuzioni > Modifica >
+Nuova versione > Distribuisci. Non creare una nuova distribuzione.
+
+Verifica le impostazioni della Web app:
+  "Esegui come": Me (titolare dello script)
+  "Chi può accedere": Chiunque
+Il sito di gestione usa la base URL impostata in SETTINGS.SITE_URL:
+https://pizzeriailsemaforo.github.io/pizzeria-il-semaforo/
+Se la pagina viene pubblicata su un dominio differente, cambia SITE_URL
+nel codice Apps Script e ridistribuisci.
+
+PROVE CONSIGLIATE
+1) Invia dal sito una richiesta con email di prova.
+2) Apri CONFERMA nell'email ricevuta dal gestore usando il telefono.
+3) Verifica la comparsa della pagina "Gestisci prenotazione" sul sito.
+4) Premi il pulsante di conferma e verifica l'email verde al cliente.
+5) Riapri la stessa richiesta: non deve partire una seconda email.
+6) Ripeti con RIFIUTA su una richiesta diversa per testare il rosso.
+
+OTTIMIZZAZIONE RESPONSIVE
+Il footer è ora compatto su desktop, tablet e smartphone: include sempre
+logo, navigazione, social, indirizzo, orario, privacy e P.IVA.
+Sui cellulari il modulo prenotazioni viene prima delle spiegazioni,
+con campi più grandi e una navigazione più semplice.
