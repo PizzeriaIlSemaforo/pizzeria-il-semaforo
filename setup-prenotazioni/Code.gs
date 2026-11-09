@@ -6,7 +6,7 @@
  */
 const SETTINGS = Object.freeze({
   OWNER_EMAIL: 'ilsemaforo.pizzeria@gmail.com', // Cambiare se vuoi ricevere su un'altra casella.
-  SITE_URL: '', // Facoltativo: indirizzo assoluto del tuo sito pubblicato.
+  SITE_URL: 'https://pizzeriailsemaforo.github.io/pizzeria-il-semaforo/', // Pagina di gestione mobile su GitHub Pages.
   PHONE: '+39 340 304 6310',
   RESTAURANT: 'Pizzeria Il Semaforo',
   TZ: 'Europe/Rome',
@@ -33,6 +33,32 @@ function doGet(e) {
 
 function doPost(e) {
   const p = (e && e.parameter) || {};
+  // Conferma/rifiuto da pagina mobile del sito. Un GET non modifica mai la prenotazione.
+  if (p.mode === 'decision') {
+    try {
+      const action = String(p.action || '');
+      const result = processDecision(String(p.token || ''), action);
+      const confirmed = action === 'confirm';
+      const title = confirmed ? 'Prenotazione confermata' : 'Richiesta non confermata';
+      const text = confirmed
+        ? 'La conferma è stata registrata e la comunicazione è stata inviata al cliente.'
+        : 'La richiesta è stata rifiutata e il cliente ha ricevuto la comunicazione.';
+      const info = result && result.message ? result.message : text;
+      const palette = confirmed ? '#22633b' : '#a3463e';
+      return webpage_(title,
+        '<div role="status" style="border-left:5px solid '+palette+';background:#f7f8f4;padding:19px 21px;margin:20px 0">' +
+        '<p style="font-weight:700;color:'+palette+';font-size:17px;margin:0 0 10px">'+escapeHtml_(title)+'</p>' +
+        '<p style="line-height:1.75;margin:0">'+escapeHtml_(info)+'</p></div>' +
+        '<p>Puoi tornare alla tua email: non è necessario ripetere l’operazione.</p>');
+    } catch (err) {
+      console.error('Gestione prenotazione: '+String(err));
+      return webpage_('Operazione non completata',
+        '<div role="alert" style="border-left:5px solid #bb5147;background:#fff1ed;padding:18px 20px;color:#803e33">' +
+        '<b>Non è stato possibile completare la decisione.</b><p style="margin-bottom:0">'+
+        escapeHtml_(String(err && err.message || 'Riprova o verifica la richiesta.'))+
+        '</p></div><p>Il cliente non deve considerare modificato l’esito finché l’invio email non è riuscito.</p>');
+    }
+  }
   if (p.mode !== 'booking') return webpage_('Richiesta non valida', '<p>Invia la richiesta dal modulo del sito.</p>');
   try {
     if (String(p.website || '').trim()) {
@@ -255,18 +281,31 @@ function mailShell_(overline,title,body) {
     '<tr><td style="padding:23px 32px;background:#f6f7f2;color:#526155;font-size:12px;line-height:1.8;border-top:1px solid #e1e7dc"><b>Pizzeria Il Semaforo</b><br>Via Palagetta, 50013 Campi Bisenzio (FI)<br>Giovedì–domenica · 19:00–23:00<br>Telefono: +39 340 304 6310<br>Per modifiche puoi rispondere a questa email.</td></tr></table>'+
     '<div style="text-align:center;color:#738075;font-size:11px;padding:17px 0">Email automatica relativa alla tua prenotazione al Semaforo.</div></td></tr></table></body></html>';
 }
-function ownerPlain_(b,url) {return `NUOVA RICHIESTA ${b.code}\n${b.name} | ${b.email} | ${b.phone}\n${b.date} ore ${b.time} | ${b.people} persone\n${b.menu}\nNote: ${b.notes||'Nessuna'}\n\nApri per confermare: ${url}?manage=${encodeURIComponent(b.manageToken)}&action=confirm\nApri per rifiutare: ${url}?manage=${encodeURIComponent(b.manageToken)}&action=reject\nI link sono riservati.`;}
+function bookingManageUrl_(b, action) {
+  const base = String(SETTINGS.SITE_URL).replace(/\/+$/, '') + '/';
+  // Token nel frammento (#): non è trasmesso ai server quando si apre la pagina.
+  return base + 'gestisci-prenotazione.html#manage=' + encodeURIComponent(b.manageToken)
+    + '&action=' + encodeURIComponent(action) + '&ref=' + encodeURIComponent(b.code);
+}
+function ownerPlain_(b,url) {
+  return 'NUOVA RICHIESTA '+b.code+'\n'+b.name+' | '+b.email+' | '+b.phone+'\n'
+    +b.date+' ore '+b.time+' | '+b.people+' persone\n'+b.menu+'\nNote: '+(b.notes||'Nessuna')
+    +'\n\nCONFERMA: '+bookingManageUrl_(b,'confirm')
+    +'\nRIFIUTA: '+bookingManageUrl_(b,'reject')
+    +'\nApri il link e premi il pulsante per inviare l’esito al cliente. Non inoltrare questo messaggio.';
+}
 function ownerHtml_(b,url) {
-  const link = url+'?manage='+encodeURIComponent(b.manageToken);
+  const confirmLink = bookingManageUrl_(b,'confirm');
+  const rejectLink = bookingManageUrl_(b,'reject');
   return mailShell_('NUOVA RICHIESTA', 'Una prenotazione da valutare',
     '<p style="color:#56665b;line-height:1.7">Hai ricevuto una nuova richiesta dal sito. Il tavolo non è ancora confermato.</p>'+
     '<table role="presentation" style="width:100%;border-collapse:collapse">'+infoRows_(b)+
     `<tr><td style="padding-top:12px;color:#66736a">Telefono</td><td style="padding-top:12px;text-align:right">${escapeHtml_(b.phone)}</td></tr>`+
     `<tr><td style="padding-top:12px;color:#66736a">Email</td><td style="padding-top:12px;text-align:right">${escapeHtml_(b.email)}</td></tr></table>`+
     `<p style="padding:15px;background:#f6f3ec;font-size:13px;line-height:1.6"><b>Note:</b> ${escapeHtml_(b.notes||'Nessuna')}</p>`+
-    `<p style="margin:28px 0"><a href="${escapeHtml_(link+'&action=confirm')}" style="display:inline-block;background:#234c36;color:#fff;padding:14px 19px;text-decoration:none;font-weight:700;margin:0 8px 8px 0">CONFERMA</a>`+
-    `<a href="${escapeHtml_(link+'&action=reject')}" style="display:inline-block;background:#f0e5da;color:#77412f;padding:14px 19px;text-decoration:none;font-weight:700">RIFIUTA</a></p>`+
-    '<p style="font-size:12px;color:#76776f">Per sicurezza, aprendo il collegamento dovrai confermare la tua scelta. Non inoltrare questa email: i link sono privati.</p>');
+    `<p style="margin:28px 0"><a href="${escapeHtml_(confirmLink)}" style="display:inline-block;background:#234c36;color:#fff;padding:14px 19px;text-decoration:none;font-weight:700;margin:0 8px 8px 0">CONFERMA</a>`+
+    `<a href="${escapeHtml_(rejectLink)}" style="display:inline-block;background:#f0e5da;color:#77412f;padding:14px 19px;text-decoration:none;font-weight:700">RIFIUTA</a></p>`+
+    '<p style="font-size:12px;color:#76776f">Per sicurezza, il collegamento apre la pagina di gestione sul sito, ottimizzata anche per smartphone. Nessuna decisione viene inviata prima del clic sul pulsante. Non inoltrare questa email: i link sono privati.</p>');
 }
 function customerPlain_(b,status) {
   const result = status==='PENDING'?'Abbiamo ricevuto la tua richiesta. Il tavolo non è ancora confermato. Riceverai una seconda email dopo la nostra verifica.':status==='CONFIRMED'?'La tua prenotazione è CONFERMATA. Ti aspettiamo!':'Ci dispiace, non possiamo confermare la disponibilità richiesta. Contattaci per concordare un’alternativa.';
@@ -297,6 +336,10 @@ function approvalPage_(b,token,action) {
 }
 function webpage_(title,body) {
   const back=SETTINGS.SITE_URL?'<a href="'+escapeHtml_(SETTINGS.SITE_URL)+'" style="color:#c89d61;text-decoration:underline">Torna al sito del Semaforo</a>':'';
-  const html='<!doctype html><html lang="it"><head><base target="_top"><meta name="viewport" content="width=device-width,initial-scale=1"><meta charset="UTF-8"><title>'+escapeHtml_(title)+' | Il Semaforo</title></head><body style="margin:0;background:#f4f1e9;color:#24382b;font-family:Arial,sans-serif;padding:45px 14px"><div style="margin:0 auto;max-width:630px;background:#fffefa;box-shadow:0 12px 55px #16271a12"><header style="padding:29px 40px;background:#1b2b20;color:white"><div style="font-family:Georgia,serif;font-size:31px">Il Semaforo</div><div style="font-size:10px;color:#d5ad76;letter-spacing:3px;margin-top:7px">RISTORANTE &amp; PIZZERIA</div></header><main style="padding:35px 40px;line-height:1.8"><h1 style="font:400 32px Georgia,serif">'+escapeHtml_(title)+'</h1>'+body+'</main><footer style="padding:18px 40px;background:#f4f1e9;font-size:12px;color:#69776a">Pizzeria Il Semaforo · Via Palagetta, Campi Bisenzio · '+escapeHtml_(SETTINGS.PHONE)+'<div style="margin-top:9px">'+back+'</div></footer></div></body></html>';
+  const html='<!doctype html><html lang="it"><head><base target="_top"><meta name="viewport" content="width=device-width, initial-scale=1"><meta charset="UTF-8"><title>'+escapeHtml_(title)+' | Il Semaforo</title>'+
+   '<style>*{box-sizing:border-box}body{margin:0;background:#f4f1e9;color:#24382b;font-family:Arial,sans-serif;padding:30px 14px}.receipt{margin:0 auto;max-width:630px;background:#fffefa;box-shadow:0 12px 55px #16271a12;overflow:hidden}.receipt-header{padding:25px 30px;background:#1b2b20;color:white}.receipt-main{padding:28px 30px;line-height:1.8;overflow-wrap:anywhere}.receipt-foot{padding:18px 30px;background:#f4f1e9;font-size:12px;line-height:1.8;color:#69776a}.receipt-main h1{font:400 32px/1.2 Georgia,serif;margin:0 0 16px}.receipt-main h2{font:400 25px/1.3 Georgia,serif}@media(max-width:520px){body{padding:12px 8px}.receipt-header{padding:20px}.receipt-main{padding:25px 20px}.receipt-foot{padding:15px 20px}.receipt-main h1{font-size:27px}}</style></head>'+
+   '<body><div class="receipt"><header class="receipt-header"><div style="font:normal 29px Georgia,serif">Il Semaforo</div><div style="font-size:10px;color:#d5ad76;letter-spacing:3px;margin-top:7px">RISTORANTE &amp; PIZZERIA</div></header>'+
+   '<main class="receipt-main"><h1>'+escapeHtml_(title)+'</h1>'+body+'</main>'+
+   '<footer class="receipt-foot">Pizzeria Il Semaforo · Via Palagetta, Campi Bisenzio · '+escapeHtml_(SETTINGS.PHONE)+'<div style="margin-top:8px">'+back+'</div></footer></div></body></html>';
   return HtmlService.createHtmlOutput(html).setTitle(title+' | Il Semaforo');
 }
